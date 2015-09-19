@@ -195,7 +195,8 @@ MonoBehaviour:
   maxSpeed: 10
   jumpForce: 25
   jumpWallHorizontalForce: 100
-  jetpackForce: 15
+  jetpackForce: 60
+  showJumpLine: 1
   crouchSpeed: .25
   jumpTime: .0731000006
   floatingFactor: 1

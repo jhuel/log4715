@@ -60,7 +60,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 		if (showJumpLine) {
 			//float maxJumpDist = (jumpForce - Physics.gravity.y) * Mathf.Pow(jumpTime, 2);
-			float maxJumpDist = Mathf.Pow(jumpForce, 2)/(2 * Physics.gravity.y);
+			float maxJumpDist = Mathf.Pow(jumpForce, 2)/(2 * Physics.gravity.y );
 			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y + maxJumpDist), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y + maxJumpDist), Color.green, 0, true);
 		}
 	}
