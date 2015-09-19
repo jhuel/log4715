@@ -15,7 +15,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 	[SerializeField] float jumpTime = 0.2f;				// Maximum jump time
 	[SerializeField] float floatingFactor = .5f;		// Floating factor when the character is moving in the air
 	[SerializeField] LayerMask whatIsGround;			// A mask determining what is ground to the character
-	[SerializeField] int maximumJumps = 2;			// A mask determining what is ground to the character
+	[SerializeField] int maximumJumps = 1;			// A mask determining what is ground to the character
 	
 	Transform groundCheck;								// A position marking where to check if the player is grounded.
 	float groundedRadius = .2f;							// Radius of the overlap circle to determine if grounded
@@ -24,10 +24,10 @@ public class PlatformerCharacter2D : MonoBehaviour
 	float ceilingRadius = .01f;							// Radius of the overlap circle to determine if the player can stand up
 	Animator anim;										// Reference to the player's animator component.
 	bool isJumping = false; 							// Character is currently jumping
+	
 	float jumpTimer = 0;
 	int jumpCounter = 0;
-
-
+	
     void Awake()
 	{
 		// Setting up references.
@@ -87,21 +87,18 @@ public class PlatformerCharacter2D : MonoBehaviour
 		}
 
 		// If the player should jump...
+
+
 		if (jumpCounter < maximumJumps && jump && !isJumping) {
 			jumpCounter++;
+			Debug.Log (jumpCounter);
 			isJumping = true;
-		} else if (jumpCounter >= maximumJumps) {
-			isJumping = false;
+			StartCoroutine (JumpRoutine ());
 		}
 
-
-		if (isJumping) {
-			StartCoroutine(JumpRoutine());
-		}
-
-		if (grounded) {
+		if (grounded && !isJumping) {
+			Debug.Log("I am grounded!");
 			jumpCounter = 0;
-			isJumping = false;
 		}
 	}
 
@@ -116,6 +113,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	// http://gamasutra.com/blogs/DanielFineberg/20150825/244650/Designing_a_Jump_in_Unity.php
 	IEnumerator JumpRoutine()
 	{
 		rigidbody2D.velocity = new Vector2 (rigidbody2D.velocity.x, 0);
@@ -134,9 +132,10 @@ public class PlatformerCharacter2D : MonoBehaviour
 			rigidbody2D.AddForce (thisFrameJumpVector);
 			
 			jumpTimer += Time.deltaTime;
-				yield return null;
+			yield return null;
 		}
 			isJumping = false;
+			Debug.Log("I have finished jumping!");
 		
 	}
 }
