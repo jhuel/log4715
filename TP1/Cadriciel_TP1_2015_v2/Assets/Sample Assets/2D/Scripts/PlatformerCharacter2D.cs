@@ -31,7 +31,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 	float ceilingRadius = .01f;							// Radius of the overlap circle to determine if the player can stand up
 	float groundedRadius = .05f;						// Radius of the overlap circle to determine if grounded
 	float wallRadius  = 0.2f;							// Radius of the overlap circle to determine if touching the wall									
-	float jumpTimer = 0;
+
 
 	bool grounded = false;								// Whether or not the player is grounded.
 	bool isTouchingWall = false;						// Whether or not the player is touching the wall
@@ -59,9 +59,26 @@ public class PlatformerCharacter2D : MonoBehaviour
 		anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
 		if (showJumpLine) {
-			//float maxJumpDist = (jumpForce - Physics.gravity.y) * Mathf.Pow(jumpTime, 2);
-			float maxJumpDist = Mathf.Pow(jumpForce, 2)/(2 * Physics.gravity.y );
+			float maxJumpDist = (((jumpForce /2.0f) + Physics.gravity.y) * Mathf.Pow(jumpTime, 2))/2.0f;
+//			float maxJumpDist2 = ((jumpForce * jumpTime)/Physics2D.gravity.y) - (jumpForce*jumpTime)/2;
+//
+//			float averageJumpForce = jumpForce * 50/2f;
+//			float y1 = ((((averageJumpForce)/(rigidbody2D.mass * 1000)) + Physics2D.gravity.y) * Mathf.Pow(jumpTime, 2f))/2f;
+//			float v1 = jumpTime * (averageJumpForce + Physics.gravity.y);
+//
+//			float t2 = v1 / Physics2D.gravity.y;
+//
+//			float y2 = v1 * t2 + (Physics2D.gravity.y * Mathf.Pow(t2,2f))/2f;
+//
+//			float totalDist = y2 + y1;
+//
+//			Debug.Log("y1 " + y1);
+//
+//			Debug.Log(rigidbody2D.mass);
+			//float maxJumpDist = Mathf.Pow(jumpForce, 2)/(2 * Physics.gravity.y );
 			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y + maxJumpDist), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y + maxJumpDist), Color.green, 0, true);
+			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y), Color.blue, 0, true);
+			Debug.Log("Maximum jump dist = " + maxJumpDist);
 		}
 	}
 
@@ -118,8 +135,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 	
 			StartCoroutine (JumpRoutine ());
 		} else if (jumpCounter == maximumJumps && CrossPlatformInput.GetButton ("Jump")) {
-			Debug.Log ("Jetpack");
-			rigidbody2D.AddForce (new Vector2 (0f, jetpackForce));
+			//Debug.Log ("Jetpack");
+			//rigidbody2D.AddForce (new Vector2 (0f, jetpackForce));
 		}
 
 		if (grounded && !isJumping) {
@@ -157,7 +174,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 		rigidbody2D.velocity = new Vector2 (rigidbody2D.velocity.x, 0);
 
-		jumpTimer = 0;
+		float jumpTimer = 0;
 		
 		// Check if jump button is still pressed
 		while(CrossPlatformInput.GetButton ("Jump") && jumpTimer < jumpTime){
@@ -173,7 +190,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 			rigidbody2D.AddForce (thisFrameJumpVector);
 			
 			jumpTimer += Time.deltaTime;
-			yield return null;
+			yield return new WaitForFixedUpdate();
 		}
 			isJumping = false;
 		

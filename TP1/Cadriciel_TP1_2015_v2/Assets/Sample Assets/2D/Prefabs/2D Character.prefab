@@ -193,12 +193,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 10
-  jumpForce: 25
+  jumpForce: 50
   jumpWallHorizontalForce: 100
-  jetpackForce: 60
+  jetpackForce: 20
   showJumpLine: 1
   crouchSpeed: .25
-  jumpTime: .0731000006
+  jumpTime: .200000003
   floatingFactor: 1
   whatIsGround:
     serializedVersion: 2
@@ -206,7 +206,7 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 1025
-  maximumJumps: 2
+  maximumJumps: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
