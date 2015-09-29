@@ -33,7 +33,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 	float wallRadius  = 0.2f;							// Radius of the overlap circle to determine if touching the wall									
 
 
-	bool grounded = false;								// Whether or not the player is grounded.
+	static public bool grounded = false;								// Whether or not the player is grounded.
+	static public bool isJetpacking = false;
 	bool isTouchingWall = false;						// Whether or not the player is touching the wall
 	bool isJumping = false; 							// Character is currently jumping
 
@@ -46,6 +47,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 		ceilingCheck = transform.Find("CeilingCheck");
 		wallCheck = transform.Find("WallCheck");
 		anim = GetComponent<Animator>();
+
 	}
 
 
@@ -59,31 +61,42 @@ public class PlatformerCharacter2D : MonoBehaviour
 		anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
 		if (showJumpLine) {
-			float maxJumpDist = (((jumpForce /2.0f) + Physics.gravity.y) * Mathf.Pow(jumpTime, 2))/2.0f;
+			//float maxJumpDist = (((jumpForce /2.0f) + Physics.gravity.y) * Mathf.Pow(jumpTime, 2))/2.0f;
 //			float maxJumpDist2 = ((jumpForce * jumpTime)/Physics2D.gravity.y) - (jumpForce*jumpTime)/2;
 //
-//			float averageJumpForce = jumpForce * 50/2f;
-//			float y1 = ((((averageJumpForce)/(rigidbody2D.mass * 1000)) + Physics2D.gravity.y) * Mathf.Pow(jumpTime, 2f))/2f;
-//			float v1 = jumpTime * (averageJumpForce + Physics.gravity.y);
+			float averageJumpForce = jumpForce/2f;
+			float y1 = ((((averageJumpForce)/((float) rigidbody2D.mass)) + Physics2D.gravity.y) * Mathf.Pow(jumpTime, 2f))/2f;
+
+			float v1 = jumpTime * ((averageJumpForce/((float) rigidbody2D.mass)) + Physics2D.gravity.y);
+
+			Debug.Log("y1 " + y1);
+			Debug.Log("v1 " + v1);
+			Debug.Log("a1 " + ((averageJumpForce/((float) rigidbody2D.mass)) + Physics2D.gravity.y));
+
+
 //
-//			float t2 = v1 / Physics2D.gravity.y;
+			float t2 = -(v1 / Physics2D.gravity.y);
+
+			Debug.Log("t2 " + t2);
 //
-//			float y2 = v1 * t2 + (Physics2D.gravity.y * Mathf.Pow(t2,2f))/2f;
+			float y2 = v1 * t2 + (Physics2D.gravity.y * Mathf.Pow(t2,2f))/2f;
 //
-//			float totalDist = y2 + y1;
+			Debug.Log("y2 " + y2);
+			float totalDist = y2 + y1;
 //
-//			Debug.Log("y1 " + y1);
+			Debug.Log("totalDist " + totalDist);
 //
 //			Debug.Log(rigidbody2D.mass);
 			//float maxJumpDist = Mathf.Pow(jumpForce, 2)/(2 * Physics.gravity.y );
-			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y + maxJumpDist), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y + maxJumpDist), Color.green, 0, true);
+			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y + totalDist), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y + totalDist), Color.green, 0, true);
 			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y), Color.blue, 0, true);
-			Debug.Log("Maximum jump dist = " + maxJumpDist);
+
 		}
 	}
 
 	public void Move(float move, bool crouch, bool jump)
 	{
+
 		// If crouching, check to see if the character can stand up
 		if (!crouch && anim.GetBool ("Crouch")) {
 			// If the character has a ceiling preventing them from standing up, keep them crouching
@@ -114,7 +127,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 		}
 
 		if (grounded) { // not in the air
-
+			isJetpacking = false;
 			rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 
 		} else if (floatingFactor > 0) {
@@ -136,7 +149,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 			StartCoroutine (JumpRoutine ());
 		} else if (jumpCounter == maximumJumps && CrossPlatformInput.GetButton ("Jump")) {
 			//Debug.Log ("Jetpack");
-			//rigidbody2D.AddForce (new Vector2 (0f, jetpackForce));
+			rigidbody2D.AddForce (new Vector2 (0f, jetpackForce));
+			isJetpacking = true;
 		}
 
 		if (grounded && !isJumping) {
