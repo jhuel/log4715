@@ -37,7 +37,8 @@ public class CameraFollow : MonoBehaviour
 
 	void Update ()
 	{
-		if (PlatformerCharacter2D.grounded || PlatformerCharacter2D.isJetpacking) {
+		if (PlatformerCharacter2D.grounded 
+		    || PlatformerCharacter2D.isJetpacking) {
 			TrackPlayerY(); 
 			Debug.Log("fuck this shit");
 		}
