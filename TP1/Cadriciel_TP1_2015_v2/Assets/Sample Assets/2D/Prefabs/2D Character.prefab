@@ -127,7 +127,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 3
+  m_GravityScale: 1
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -193,9 +193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 10
-  jumpForce: 50
-  jumpWallHorizontalForce: 100
-  jetpackForce: 20
+  jumpForce: 75
+  jumpWallHorizontalForce: 500
+  jetpackForce: 12
   showJumpLine: 1
   crouchSpeed: .25
   jumpTime: .200000003
@@ -206,7 +206,7 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 1025
-  maximumJumps: 1
+  maximumJumps: 2
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

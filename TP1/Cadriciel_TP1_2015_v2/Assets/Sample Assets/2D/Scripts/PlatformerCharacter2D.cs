@@ -7,9 +7,9 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 	[SerializeField] float maxSpeed = 10f;					// The fastest the player can travel in the x axis.
 	[SerializeField] float jumpForce = 10f;					// Amount of force added when the player jumps.	
-	[SerializeField] float jumpWallHorizontalForce = 50f;		// Amount of force added when the player jumps when he touches the wall. This is an offset to the X component
-	[SerializeField] float jetpackForce = 1f;			//
-	[SerializeField] bool showJumpLine = false;			// A boolean marking the maximum jump distance relative to the character
+	[SerializeField] float jumpWallHorizontalForce = 400f;		// Amount of force added when the player jumps when he touches the wall. This is an offset to the X component
+	[SerializeField] float jetpackForce = 15f;			//
+	[SerializeField] bool showJumpLine = true;			// A boolean marking the maximum jump distance relative to the character
 
 	[Range(0, 1)]
 	[SerializeField] float crouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -19,9 +19,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 	[SerializeField] float floatingFactor = .5f;		// Floating factor when the character is moving in the air
 	[SerializeField] LayerMask whatIsGround;			// A mask determining what is ground to the character
 	[SerializeField] LayerMask whatIsWall;				// A mask determining what is wall to the character
-	[SerializeField] int maximumJumps = 1;				// A mask determining what is ground to the character
+	[SerializeField] int maximumJumps = 2;				// A mask determining what is ground to the character
 
-	
 	Transform ceilingCheck;								// A position marking where to check for ceilings
 	Transform groundCheck;								// A position marking where to check if the player is grounded
 	Transform wallCheck;								// A position marking where to check for walls
@@ -32,14 +31,14 @@ public class PlatformerCharacter2D : MonoBehaviour
 	float groundedRadius = .05f;						// Radius of the overlap circle to determine if grounded
 	float wallRadius  = 0.2f;							// Radius of the overlap circle to determine if touching the wall									
 
-
-	static public bool grounded = false;								// Whether or not the player is grounded.
+	static public bool grounded = false;				// Whether or not the player is grounded.
 	static public bool isJetpacking = false;
 	bool isTouchingWall = false;						// Whether or not the player is touching the wall
 	bool isJumping = false; 							// Character is currently jumping
 
 	Animator anim;										// Reference to the player's animator component.
-	
+
+
     void Awake()
 	{
 		// Setting up references.
@@ -47,9 +46,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 		ceilingCheck = transform.Find("CeilingCheck");
 		wallCheck = transform.Find("WallCheck");
 		anim = GetComponent<Animator>();
-
 	}
-
 
 	void FixedUpdate()
 	{
@@ -61,33 +58,19 @@ public class PlatformerCharacter2D : MonoBehaviour
 		anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
 		if (showJumpLine) {
-			//float maxJumpDist = (((jumpForce /2.0f) + Physics.gravity.y) * Mathf.Pow(jumpTime, 2))/2.0f;
-//			float maxJumpDist2 = ((jumpForce * jumpTime)/Physics2D.gravity.y) - (jumpForce*jumpTime)/2;
-//
+			// Calculate maximum jump height using acceleration, mass and forces applied to the RigidBody2D.
 			float averageJumpForce = jumpForce/2f;
 			float y1 = ((((averageJumpForce)/((float) rigidbody2D.mass)) + Physics2D.gravity.y) * Mathf.Pow(jumpTime, 2f))/2f;
 
 			float v1 = jumpTime * ((averageJumpForce/((float) rigidbody2D.mass)) + Physics2D.gravity.y);
 
-			Debug.Log("y1 " + y1);
-			Debug.Log("v1 " + v1);
-			Debug.Log("a1 " + ((averageJumpForce/((float) rigidbody2D.mass)) + Physics2D.gravity.y));
 
-
-//
 			float t2 = -(v1 / Physics2D.gravity.y);
 
-			Debug.Log("t2 " + t2);
-//
 			float y2 = v1 * t2 + (Physics2D.gravity.y * Mathf.Pow(t2,2f))/2f;
-//
-			Debug.Log("y2 " + y2);
 			float totalDist = y2 + y1;
-//
-			Debug.Log("totalDist " + totalDist);
-//
-//			Debug.Log(rigidbody2D.mass);
-			//float maxJumpDist = Mathf.Pow(jumpForce, 2)/(2 * Physics.gravity.y );
+
+			// One line is at the center of mass of the RigidBody2D, the other is at the maximum jump height distance.
 			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y + totalDist), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y + totalDist), Color.green, 0, true);
 			Debug.DrawLine (new Vector3 (rigidbody2D.position.x - 200, rigidbody2D.position.y), new Vector3 (rigidbody2D.position.x + 200, rigidbody2D.position.y), Color.blue, 0, true);
 
@@ -96,7 +79,6 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-
 		// If crouching, check to see if the character can stand up
 		if (!crouch && anim.GetBool ("Crouch")) {
 			// If the character has a ceiling preventing them from standing up, keep them crouching
@@ -148,13 +130,11 @@ public class PlatformerCharacter2D : MonoBehaviour
 	
 			StartCoroutine (JumpRoutine ());
 		} else if (jumpCounter == maximumJumps && CrossPlatformInput.GetButton ("Jump")) {
-			//Debug.Log ("Jetpack");
 			rigidbody2D.AddForce (new Vector2 (0f, jetpackForce));
 			isJetpacking = true;
 		}
 
 		if (grounded && !isJumping) {
-			Debug.Log ("I am grounded and I reset jump counter");
 			jumpCounter = 0;
 		}
 	}
@@ -173,8 +153,6 @@ public class PlatformerCharacter2D : MonoBehaviour
 	// http://gamasutra.com/blogs/DanielFineberg/20150825/244650/Designing_a_Jump_in_Unity.php
 	IEnumerator JumpRoutine()
 	{
-
-
 		float xComponent = 0f;
 		if (isTouchingWall) {
 			xComponent = jumpWallHorizontalForce;
@@ -185,7 +163,6 @@ public class PlatformerCharacter2D : MonoBehaviour
 			}
 			Flip ();
 		}
-
 		rigidbody2D.velocity = new Vector2 (rigidbody2D.velocity.x, 0);
 
 		float jumpTimer = 0;
@@ -197,8 +174,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 			
 			Vector2 thisFrameJumpVector = Vector2.Lerp (new Vector2 (0f, jumpForce), Vector2.zero, proportionCompleted);
 
-			thisFrameJumpVector += Vector2.Lerp ( Vector2.zero,new Vector2 (xComponent, 0f), proportionCompleted);
-			
+			thisFrameJumpVector += Vector2.Lerp (new Vector2 (xComponent, 0f), Vector2.zero, proportionCompleted);
 
 			// Increment the force relative to the time spent with the jump button pressed
 			rigidbody2D.AddForce (thisFrameJumpVector);
