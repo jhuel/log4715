@@ -17,21 +17,27 @@ public class CarUserControlMP : MonoBehaviour
 		car = GetComponent<CarController>();
 	}
 	
-	
+	void Update()
+    { 
+        // http://answers.unity3d.com/questions/19710/shooting-a-bullet-projectile-properly.html 
+        bool fire = CrossPlatformInput.GetButtonDown("Fire1");
+        if (fire)
+        {
+            car.Shoot();
+        }
+    }
 	void FixedUpdate()
 	{
 		// pass the input to the car!
 		#if CROSS_PLATFORM_INPUT
 		float h = CrossPlatformInput.GetAxis(horizontal);
 		float v = CrossPlatformInput.GetAxis(vertical);
-		bool fire = CrossPlatformInput.GetButtonDown("Fire1");
+		
 		#else
 		float h = Input.GetAxis(horizontal);
 		float v = Input.GetAxis(vertical);
 		#endif
 		car.Move(h,v);
-		if (fire) {
-			car.Shoot();
-		}
+		
 	}
 }
