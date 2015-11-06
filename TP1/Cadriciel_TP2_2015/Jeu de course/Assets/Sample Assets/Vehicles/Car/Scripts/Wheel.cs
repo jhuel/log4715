@@ -52,6 +52,8 @@ public class Wheel : MonoBehaviour
     private float skidFactorTarget;
     private bool ignore;
 	private Vector3 originalWheelModelPosition;
+    private int pendingPoints; // on va donner un point à tous les pointTresh pts
+    private const int pointTresh = 15; // je trouvais que pour le drift, ca donnait un pas pire resultat de points pour le temps de slide
 
     void Start()
     {
@@ -145,6 +147,15 @@ public class Wheel : MonoBehaviour
                     particleEmit = 0;
                     skidSmokeSystem.transform.position = transform.position - transform.up * wheelCollider.radius;
                     skidSmokeSystem.Emit(1);
+
+                    // Points pour drift
+                    pendingPoints++;
+                    if (pendingPoints == pointTresh)
+                    {
+                        car.PlayerPoints++;
+                        pendingPoints = 0;
+                    }
+
                 }
             }
         }

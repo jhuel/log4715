@@ -73,10 +73,20 @@ public class CarController : MonoBehaviour
 	
 	public int NumGears {					// the number of gears set up on the car
 		get { return advanced.numGears; }
-	}		
+	}
 
 
-
+    private int playerPoints = 0;
+    public int PlayerPoints
+    {
+        get { return playerPoints; }
+        set 
+        { 
+            playerPoints = value; 
+            if (playerPoints > 0 && gameObject.transform.name.CompareTo("Joueur 1") == 0) 
+                Debug.Log("PlayerPoints : " + gameObject.transform.name + ' ' + PlayerPoints.ToString()); 
+        }
+    }
 
 	// the following values are provided as read-only properties,
 	// and are required by the Wheel script to compute grip, burnout, skidding, etc
@@ -186,7 +196,7 @@ public class CarController : MonoBehaviour
 	
 	
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log (collision.collider.gameObject.name);
+		//Debug.Log (collision.collider.gameObject.name);
 
 
 		if (gameObject.name == "Joueur 1") { // Player 1 is concerned
