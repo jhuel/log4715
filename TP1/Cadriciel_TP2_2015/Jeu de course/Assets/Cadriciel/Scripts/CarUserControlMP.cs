@@ -23,7 +23,12 @@ public class CarUserControlMP : MonoBehaviour
         bool fire = CrossPlatformInput.GetButtonDown("Fire1");
         if (fire)
         {
-            car.Shoot();
+            car.ShootGreen();
+        }
+
+        if (CrossPlatformInput.GetButtonDown("Fire2"))
+        {
+            car.shootRed();
         }
     }
 	void FixedUpdate()

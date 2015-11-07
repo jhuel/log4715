@@ -31,7 +31,7 @@ public class MultiplayerMode : MonoBehaviour {
 		{
 			Rect cam1Rect = _p1Camera.rect;
 			cam1Rect.y = 0.5f;
-			cam1Rect.height = 0.5f;
+			cam1Rect.height = 0.8f;
 			_p1Camera.rect = cam1Rect;
 			_p2CameraRig.SetActive(true);
 			_p2Car.SetActive(true);
