@@ -137,7 +137,7 @@ public class CarController : MonoBehaviour
 	bool reversing;
 	float targetAccelInput; // target accel input is our desired acceleration input. We smooth towards it later
 
-    Transform projectile;
+    Object projectile;
 	float speed = 20;
 	
 
@@ -186,12 +186,10 @@ public class CarController : MonoBehaviour
 	public void Shoot() {
 
         // http://answers.unity3d.com/questions/19710/shooting-a-bullet-projectile-properly.html
-
+        // http://answers.unity3d.com/questions/12003/instantiate-a-prefab-through-code-in-c.html
         Transform clone;
-		projectile = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
-        
 
-		//projectile = new Transform(
+        projectile = Resources.LoadAssetAtPath("Assets/Sample Assets/Utility/Prefabs/BouncyProjectile.prefab", typeof(GameObject));
         clone = (Transform)Instantiate(projectile, transform.position + new Vector3(5, 0, 0), transform.rotation);
         clone.gameObject.AddComponent<Rigidbody>();
         clone.rigidbody.AddRelativeForce(clone.transform.forward * 80);
