@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
@@ -77,14 +78,30 @@ public class CarController : MonoBehaviour
 
 
     private int playerPoints = 0;
+
+    public Text playerPointText;
+
+
     public int PlayerPoints
     {
         get { return playerPoints; }
         set 
         { 
             playerPoints = value; 
-            if (playerPoints > 0 && gameObject.transform.name.CompareTo("Joueur 1") == 0) 
-                Debug.Log("PlayerPoints : " + gameObject.transform.name + ' ' + PlayerPoints.ToString()); 
+        }
+    }
+
+    private int airPoints = 0;
+    void FixedUpdate()
+    {
+        if (!anyOnGround)
+        {
+            airPoints++;
+            if (airPoints == 3)
+            {
+                PlayerPoints += 3;
+                airPoints = 0;
+            }
         }
     }
 
@@ -182,6 +199,14 @@ public class CarController : MonoBehaviour
 		PreserveDirectionInAir();
 
 	}
+
+    void OnGUI()
+    {
+        if (playerPointText != null) 
+        { 
+            playerPointText.text = ("Styling points : " + playerPoints.ToString());
+        }
+    }
 
 	public void Shoot() {
 
