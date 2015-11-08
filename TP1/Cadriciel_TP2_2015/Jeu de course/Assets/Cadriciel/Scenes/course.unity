@@ -844,7 +844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &28399475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1002,7 +1001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &39385428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3347,7 +3345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &169402571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3590,7 +3587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &177569970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9352,7 +9348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &452664327
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9747,6 +9742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -9771,11 +9768,13 @@ MonoBehaviour:
     accelChangeSmoothing: 2
     gearFactorSmoothing: 5
     revRangeBoundary: .800000012
-  preserveDirectionWhileInAir: 1
+  preserveDirectionWhileInAir: 0
   mphDisplay: {fileID: 0}
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 200
   playerPointText: {fileID: 1692537659}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &481286552
@@ -9863,6 +9862,7 @@ MonoBehaviour:
   fireGreen: Fire1
   fireRed: Fire2
   useCollectible: UseCollectible1
+  jump: Jump
 --- !u!54 &481286557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10416,6 +10416,14 @@ Prefab:
       propertyPath: playerPointText
       value: 
       objectReference: {fileID: 1692537659}
+    - target: {fileID: 11400030, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 2}
+      propertyPath: jumpForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400030, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 2}
+      propertyPath: preserveDirectionWhileInAir
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400026, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 2}
@@ -11498,7 +11506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &617640921
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11761,7 +11768,7 @@ GameObject:
   - 114: {fileID: 636401177}
   m_Layer: 0
   m_Name: Start
-  m_TagString: Untagged
+  m_TagString: checkpoint1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12811,7 +12818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &666871175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14245,7 +14251,7 @@ GameObject:
   - 114: {fileID: 796680444}
   m_Layer: 0
   m_Name: End
-  m_TagString: Untagged
+  m_TagString: checkpoint3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18222,7 +18228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &882973351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19979,7 +19984,7 @@ GameObject:
   - 114: {fileID: 949470373}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: checkpoint2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20738,6 +20743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -20767,6 +20774,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!54 &981142460
@@ -21614,7 +21623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1052194675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23644,7 +23652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1155966174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24623,7 +24630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1195794013
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24958,7 +24964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1212980991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29268,6 +29273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -29297,6 +29304,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &1368033982
@@ -29475,7 +29484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1368475012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30463,7 +30471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1464828039
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30754,7 +30761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1485952809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32128,7 +32134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1538313385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33439,6 +33444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -33468,6 +33475,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &1635867385
@@ -34091,7 +34100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1678842919
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35761,7 +35769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1772693211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36275,7 +36282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!1 &1806963580
 GameObject:
   m_ObjectHideFlags: 0
@@ -37617,6 +37623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -37646,6 +37654,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!54 &1881066739
@@ -40127,7 +40137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &1972544827
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40342,6 +40351,7 @@ MonoBehaviour:
   fireGreen: Fire12
   fireRed: Fire22
   useCollectible: UseCollectible1_2
+  jump: Jump
 --- !u!114 &1977983690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40354,6 +40364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -40383,6 +40395,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 375989828}
   playerCollectibleText: {fileID: 0}
 --- !u!54 &1977983691
@@ -40688,7 +40702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &2007445488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40962,7 +40975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &2016337282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41815,6 +41827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -41844,6 +41858,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &2042105153
@@ -42747,7 +42763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &2090683126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42804,7 +42819,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93624db0718259a46a602e33d0930390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
 --- !u!65 &2094617313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42905,6 +42919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
   maxSpeedSteerAngle: .156000003
@@ -42934,6 +42950,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &2099699819
