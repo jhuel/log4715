@@ -48,14 +48,6 @@ public class RaceManager : MonoBehaviour
             carOrder[car.GetCarPosition(allCars) - 1] = car; //placer les voitures en ordre
             car.ApplyRubberBand(getRubberBandMult(car.GetCarPosition(allCars) - 1)); //appliquer le rubberbanding
         }
-        /*Debug.Log("p1: " + carOrder[0].transform.name 
-            + "  p2: " + carOrder[1].transform.name 
-            + "  p3: " + carOrder[2].transform.name 
-            + "  p4: " + carOrder[3].transform.name 
-            + "  p5: " + carOrder[4].transform.name 
-            + "  p6: " + carOrder[5].transform.name
-            + "  p7: " + carOrder[6].transform.name
-            + "  p8: " + carOrder[7].transform.name);*/
     }
 
     float getRubberBandMult(int position)

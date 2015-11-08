@@ -34,6 +34,8 @@ ehthumbs.db
 [Tt]humbs.db
 
 *.log
+*.csproj
+*.meta
 
 .DS_Store
 /Temp/
@@ -57,5 +59,7 @@ ehthumbs.db
 /Library/previews
 /Library/ScriptAssemblies/Assembly-CSharp.dll
 /Library/ScriptAssemblies/Assembly-CSharp.dll.mdb 
+
+Library/
 
 *.sln
