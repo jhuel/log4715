@@ -140,7 +140,7 @@ public class CarController : MonoBehaviour
     {
         if(SpeedBonus > 0)
         {
-            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 500f)));
+            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 250f)));
             SpeedBonus--;
         }
 
