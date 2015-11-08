@@ -10,6 +10,7 @@ public class FreeLookCamInspector : Editor {
 		if ((target as FreeLookCam).warning != "")
 		{
 			EditorGUILayout.HelpBox((target as FreeLookCam).warning, MessageType.Warning);
+
 		}
 	}
 }

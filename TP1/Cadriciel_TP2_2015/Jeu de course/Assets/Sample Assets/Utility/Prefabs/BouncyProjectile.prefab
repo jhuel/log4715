@@ -16,7 +16,7 @@ GameObject:
   - 54: {fileID: 5412978}
   m_Layer: 0
   m_Name: BouncyProjectile
-  m_TagString: Untagged
+  m_TagString: Smelly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab03e988af151a4094cb8c193cdf28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowedBounces: 2
+  allowedBounces: 100
 --- !u!131 &13127618
 GUITexture:
   m_ObjectHideFlags: 1
@@ -95,7 +95,7 @@ GUITexture:
   m_GameObject: {fileID: 127618}
   m_Enabled: 1
   m_Texture: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: .131034613, a: .501960814}
+  m_Color: {r: .117241383, g: 0, b: 1, a: .501960814}
   m_PixelInset:
     serializedVersion: 2
     x: 0
