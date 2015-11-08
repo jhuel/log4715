@@ -1,10 +1,10 @@
 Base path: C:/Program Files (x86)/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-1-5096
+Pipe name: \\.\pipe\UnityShaderCompiler-1-5264
 Cmd: getPlatforms
 Cmd: preprocess
-  insize=447 outsize=447 ok=1
+  insize=464 outsize=464 ok=1
 Cmd: preprocess
-  insize=1584 outsize=2244 ok=1
+  insize=1651 outsize=2266 ok=1
 Cmd: preprocess
   insize=2933 outsize=203 ok=1
 Cmd: compileSnippet
@@ -12,15 +12,15 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=1 insize=2950 outsize=1926 kw=LIGHT_ON_SCREEN DIRECTIONAL_SHAFTS ok=1
 Cmd: preprocess
-  insize=1479 outsize=1093 ok=1
+  insize=1533 outsize=1118 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=4983 outsize=784 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
   api=1 type=1 insize=4983 outsize=526 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: preprocess
-  insize=836 outsize=215 ok=1
+  insize=889 outsize=229 ok=1
 Cmd: preprocess
-  insize=1423 outsize=2191 ok=1
+  insize=1486 outsize=2211 ok=1
 Cmd: preprocess
   insize=7006 outsize=291 ok=1
 Cmd: compileSnippet
@@ -28,7 +28,7 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=1 insize=6815 outsize=3006 kw=LIGHT_ON_SCREEN DIRECTIONAL_SHAFTS SHOW_SAMPLES_OFF QUAD_SHAFTS FLIP_WORKAROUND_OFF ok=1
 Cmd: preprocess
-  insize=1013 outsize=1267 ok=1
+  insize=1060 outsize=1283 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=4860 outsize=656 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
@@ -46,7 +46,7 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=1 insize=4533 outsize=543 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
 Cmd: preprocess
-  insize=1048 outsize=887 ok=1
+  insize=1101 outsize=904 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=4808 outsize=595 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
@@ -62,13 +62,13 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=1 insize=1534 outsize=141 kw=SOFTPARTICLES_OFF ok=1
 Cmd: preprocess
-  insize=2237 outsize=975 ok=1
+  insize=2340 outsize=1021 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=1561 outsize=171 kw=SOFTPARTICLES_OFF ok=1
 Cmd: compileSnippet
   api=1 type=1 insize=1561 outsize=121 kw=SOFTPARTICLES_OFF ok=1
 Cmd: preprocess
-  insize=551 outsize=183 ok=1
+  insize=584 outsize=192 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=665 outsize=145 kw= ok=1
 Cmd: compileSnippet
@@ -96,7 +96,7 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=1 insize=4197 outsize=1916 kw=DIRECTIONAL_SHAFTS COLORED_ON ATTENUATION_CURVE_ON COOKIE_TEX_ON ok=1
 Cmd: preprocess
-  insize=1576 outsize=991 ok=1
+  insize=1654 outsize=1035 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=867 outsize=316 kw= ok=1
 Cmd: compileSnippet
@@ -104,7 +104,7 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=0 insize=834 outsize=316 kw= ok=1
 Cmd: preprocess
-  insize=27271 outsize=4722 ok=1
+  insize=28296 outsize=4971 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=19247 outsize=318 kw= ok=1
 Cmd: compileSnippet
@@ -204,18 +204,22 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=1 type=1 insize=1282 outsize=823 kw= ok=1
 Cmd: preprocess
-  insize=719 outsize=719 ok=1
+  insize=743 outsize=743 ok=1
 Cmd: preprocess
-  insize=2274 outsize=1036 ok=1
+  insize=2379 outsize=1086 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=1537 outsize=171 kw=SOFTPARTICLES_OFF ok=1
 Cmd: compileSnippet
   api=1 type=1 insize=1537 outsize=141 kw=SOFTPARTICLES_OFF ok=1
 Cmd: preprocess
-  insize=1500 outsize=667 ok=1
+  insize=1574 outsize=702 ok=1
 Cmd: compileSnippet
   api=1 type=0 insize=1135 outsize=272 kw= ok=1
 Cmd: compileSnippet
   api=1 type=1 insize=1135 outsize=192 kw= ok=1
 Cmd: preprocess
-  insize=5752 outsize=1270 ok=1
+  insize=6008 outsize=1334 ok=1
+Cmd: compileSnippet
+  api=1 type=0 insize=2847 outsize=253 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=1 type=1 insize=2847 outsize=337 kw=DIRECTIONAL ok=1
