@@ -112,6 +112,13 @@ public class CarController : MonoBehaviour
         currentLap = 0;
     }
 
+    private enum CollectibleTypes
+    {
+        CollectibleNone,
+        CollectibleHeal,
+        CollectibleSpeed
+    }
+    private CollectibleTypes currentCollectible;
     private int SpeedBonus; // number of iteration of accel bonus
     public void OnTriggerEnter(Collider other) {
 
@@ -120,6 +127,18 @@ public class CarController : MonoBehaviour
         if (otherTag.CompareTo("SpeedBonus") == 0)
         {
             SpeedBonus = 3;
+        }
+        if (otherTag.CompareTo("CollectibleSpeed") == 0)
+        {
+            currentCollectible = CollectibleTypes.CollectibleSpeed;
+        }
+        if (otherTag.CompareTo("CollectibleHeal") == 0)
+        {
+            currentCollectible = CollectibleTypes.CollectibleHeal;
+        }
+        if (otherTag.CompareTo("CollectibleXXXXXXXX") == 0)
+        {
+            currentCollectible = CollectibleTypes.CollectibleNone;
         }
         else if (otherTag.CompareTo("checkpoint1") == 0)
         {
@@ -131,9 +150,6 @@ public class CarController : MonoBehaviour
         {
             lastCheckpoint = other.transform;
         }
-
-
-         
      }
  
     public void Update()
@@ -190,6 +206,7 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        currentCollectible = CollectibleTypes.CollectibleNone;
         SpeedBonus = 0;
         PlayerPoints = 0;
     }
