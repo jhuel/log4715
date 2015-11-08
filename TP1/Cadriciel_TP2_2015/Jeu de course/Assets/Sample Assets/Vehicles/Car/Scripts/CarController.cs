@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
@@ -58,6 +59,12 @@ public class CarController : MonoBehaviour
     private float maxReversingSpeed;                                                // The maximum reversing speed
 	private bool immobilized;                                                       // Whether the car is accepting inputs.
 
+    public int currentCheckpoint;
+    public int currentLap;
+    public Transform lastCheckpoint;
+
+    private static int CHECKPOINT_VALUE = 100;
+    private static int LAP_VALUE = 10000;
 
 	// publicly read-only props, useful for GUI, Sound effects, etc.
 	public int GearNum { get; private set; }                                        // the current gear we're in.
@@ -70,7 +77,39 @@ public class CarController : MonoBehaviour
 	public float AvgSkid { get; private set; }                                      // the average skid factor from all wheels
     public float RevsFactor { get; private set; }                                   // value between 0-1 indicating where the current revs fall between 0 and max revs
     public float SpeedFactor { get;  private set; }                                 // value between 0-1 of the car's current speed relative to max speed
-	
+
+
+    // Use this for initialization
+    public void Initialize()
+    {
+        currentCheckpoint = 0;
+        currentLap = 0;
+    }
+
+    public void OnTriggerEnter(Collider other) {
+         string otherTag = other.gameObject.tag;
+         currentCheckpoint = System.Convert.ToInt32(otherTag);
+         if (currentCheckpoint == 1) // completed a lap, so increase currentLap;
+             currentLap++;
+         lastCheckpoint = other.transform;
+     }
+ 
+     public float GetDistance() {
+         if (lastCheckpoint == null)
+             return -10000;
+         return (transform.position - lastCheckpoint.position).magnitude + currentCheckpoint * CHECKPOINT_VALUE + currentLap * LAP_VALUE;
+     }
+ 
+     public int GetCarPosition(CarController[] allCars) {
+         float distance = GetDistance();
+         int position = 1;
+         foreach (CarController car in allCars) {
+             if (car.GetDistance() > distance && name != car.name)
+                 position++;
+         }
+         return position;
+     }
+
 	public int NumGears {					// the number of gears set up on the car
 		get { return advanced.numGears; }
 	}
@@ -83,8 +122,8 @@ public class CarController : MonoBehaviour
         set 
         { 
             playerPoints = value; 
-            if (playerPoints > 0 && gameObject.transform.name.CompareTo("Joueur 1") == 0) 
-                Debug.Log("PlayerPoints : " + gameObject.transform.name + ' ' + PlayerPoints.ToString()); 
+            //if (playerPoints > 0 && gameObject.transform.name.CompareTo("Joueur 1") == 0) 
+                //Debug.Log("PlayerPoints : " + gameObject.transform.name + ' ' + PlayerPoints.ToString()); 
         }
     }
 
