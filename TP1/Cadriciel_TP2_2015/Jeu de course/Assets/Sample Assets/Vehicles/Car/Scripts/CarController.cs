@@ -232,7 +232,7 @@ public class CarController : MonoBehaviour
 
     public Text playerPointText;
     public Text playerCollectibleText;
-
+    public Text playerHPText;
 
     public int PlayerPoints
     {
@@ -257,6 +257,7 @@ public class CarController : MonoBehaviour
         SpeedBonus = 0;
         PlayerPoints = 0;
         carHP = MAX_CAR_HP;
+        healthSpeedMultip = 1.0f;
     }
 
     private int airPoints = 0;
@@ -428,6 +429,10 @@ public class CarController : MonoBehaviour
             playerCollectibleText.text = "Current Collectible : " + collectibleString;
         }
 
+        if(playerHPText!= null)
+        {
+            playerHPText.text = "HP = " + carHP.ToString();
+        }
         
     }
 
