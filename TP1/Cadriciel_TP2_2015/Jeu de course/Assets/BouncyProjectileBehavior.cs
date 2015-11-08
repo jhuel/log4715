@@ -25,6 +25,7 @@ public class BouncyProjectileBehavior : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<CarController>().getHit();
             Destroy(gameObject);
         }
 
