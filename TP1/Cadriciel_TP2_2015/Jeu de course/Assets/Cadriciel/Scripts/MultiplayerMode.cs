@@ -29,7 +29,7 @@ public class MultiplayerMode : MonoBehaviour {
 		float v = Input.GetAxis(vertical);
 		#endif
 
-        if(car != null)
+        if (car != null && CrossPlatformInput.GetButtonDown("useCollectible2")) 
             car.useCollectible();
         else
             car = GetComponent<CarController>();

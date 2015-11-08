@@ -22,6 +22,7 @@ public class CarController : MonoBehaviour
     const float MAX_SPEED = 60;
     const float MAX_TORQUE = 35;
     const float MAX_STEER_ANGLE = 28;
+    const int MAX_CAR_HP = 5;
 
     [SerializeField]
     private float maxSteerAngle = MAX_STEER_ANGLE;                              // The maximum angle the car can steer
@@ -182,6 +183,25 @@ public class CarController : MonoBehaviour
         get { return advanced.numGears; }
     }
 
+    private int carHP;
+    public void getHit(int damage = 1)
+    {
+        carHP -= damage;
+
+        dealWithDamage();
+    }
+    private void dealWithDamage()
+    {
+        if (carHP == 0)
+        {
+            speed = 0;
+        }
+        if(carHP <= MAX_CAR_HP/3)
+        {
+            // todo maxspeed est descendu
+            // eric pls do
+        }
+    }
 
     private int playerPoints;
 
@@ -210,6 +230,7 @@ public class CarController : MonoBehaviour
         currentCollectible = CollectibleTypes.CollectibleNone;
         SpeedBonus = 0;
         PlayerPoints = 0;
+        carHP = MAX_CAR_HP;
     }
 
     private int airPoints = 0;
