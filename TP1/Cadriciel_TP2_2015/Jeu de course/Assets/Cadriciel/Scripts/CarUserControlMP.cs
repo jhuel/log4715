@@ -20,8 +20,7 @@ public class CarUserControlMP : MonoBehaviour
 	void Update()
     { 
         // http://answers.unity3d.com/questions/19710/shooting-a-bullet-projectile-properly.html 
-        bool fire = CrossPlatformInput.GetButtonDown("Fire1");
-        if (fire)
+        if (CrossPlatformInput.GetButtonDown("Fire1"))
         {
             car.ShootGreen();
         }
@@ -30,6 +29,13 @@ public class CarUserControlMP : MonoBehaviour
         {
             car.shootRed();
         }
+
+        if(CrossPlatformInput.GetButtonDown("useCollectible1"))
+        {
+            car.useCollectible();
+        }
+
+
     }
 	void FixedUpdate()
 	{

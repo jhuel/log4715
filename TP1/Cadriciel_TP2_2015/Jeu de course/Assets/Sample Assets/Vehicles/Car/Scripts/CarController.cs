@@ -402,6 +402,27 @@ public class CarController : MonoBehaviour
 
     }
 
+    public void useCollectible()
+    { 
+        switch(currentCollectible)
+        {
+            case CollectibleTypes.CollectibleSpeed:
+                SpeedBonus = 3;
+                break;
+
+            case CollectibleTypes.CollectibleHeal:
+                // todo
+                break;
+
+            case CollectibleTypes.CollectibleNone:
+            default:
+                break;
+
+        }
+
+        currentCollectible = CollectibleTypes.CollectibleNone;
+    }
+
 
     void OnCollisionEnter(Collision collision)
     {

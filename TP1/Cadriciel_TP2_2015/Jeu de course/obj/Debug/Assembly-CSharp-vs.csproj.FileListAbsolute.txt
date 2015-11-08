@@ -45,3 +45,4 @@ C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\
 C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSharpCode.NRefactory.dll
 C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
 C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
