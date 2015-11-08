@@ -252,6 +252,7 @@ public class CarController : MonoBehaviour
         SpeedBonus = 0;
         PlayerPoints = 0;
         carHP = MAX_CAR_HP;
+        healthSpeedMultip = 1.0f;
     }
 
     private int airPoints = 0;
