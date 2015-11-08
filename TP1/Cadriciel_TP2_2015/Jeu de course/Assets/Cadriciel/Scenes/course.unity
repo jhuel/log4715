@@ -9776,6 +9776,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 1692537659}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &481286552
@@ -9863,6 +9865,7 @@ MonoBehaviour:
   fireGreen: Fire1
   fireRed: Fire2
   useCollectible: UseCollectible1
+  jump: Jump
 --- !u!54 &481286557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11761,7 +11764,7 @@ GameObject:
   - 114: {fileID: 636401177}
   m_Layer: 0
   m_Name: Start
-  m_TagString: Untagged
+  m_TagString: checkpoint1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14245,7 +14248,7 @@ GameObject:
   - 114: {fileID: 796680444}
   m_Layer: 0
   m_Name: End
-  m_TagString: Untagged
+  m_TagString: checkpoint3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19979,7 +19982,7 @@ GameObject:
   - 114: {fileID: 949470373}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: checkpoint2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20767,6 +20770,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!54 &981142460
@@ -29297,6 +29302,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &1368033982
@@ -33468,6 +33475,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &1635867385
@@ -37646,6 +37655,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!54 &1881066739
@@ -40342,6 +40353,7 @@ MonoBehaviour:
   fireGreen: Fire12
   fireRed: Fire22
   useCollectible: UseCollectible1_2
+  jump: Jump
 --- !u!114 &1977983690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40383,6 +40395,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 375989828}
   playerCollectibleText: {fileID: 0}
 --- !u!54 &1977983691
@@ -41844,6 +41858,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &2042105153
@@ -42934,6 +42950,8 @@ MonoBehaviour:
   currentCheckpoint: 0
   currentLap: 0
   lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 1000
   playerPointText: {fileID: 0}
   playerCollectibleText: {fileID: 0}
 --- !u!114 &2099699819
