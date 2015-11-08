@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,10 +20,10 @@ public class CarController : MonoBehaviour
     // on the car's current speed. These gear and rev values can then be read and used by a GUI or Sound component.
 
 
-    const float MAX_SPEED = 60;
-    const float MAX_TORQUE = 35;
+    const float MAX_SPEED = 75;
+    const float MAX_TORQUE = 50;
     const float MAX_STEER_ANGLE = 28;
-    const int MAX_CAR_HP = 5;
+    const int MAX_CAR_HP = 100;
 
     [SerializeField]
     private float maxSteerAngle = MAX_STEER_ANGLE;                              // The maximum angle the car can steer
@@ -85,6 +86,7 @@ public class CarController : MonoBehaviour
     private float smallSpeed;                                                       // A small proportion of max speed, used to decide when to start accelerating/braking when transitioning between fwd and reverse motion
     private float maxReversingSpeed;                                                // The maximum reversing speed
     private bool immobilized;                                                       // Whether the car is accepting inputs.
+    private float healthSpeedMultip;
 
     public int currentCheckpoint;
     public int currentLap;
@@ -92,6 +94,14 @@ public class CarController : MonoBehaviour
 
     private static int CHECKPOINT_VALUE = 100;
     private static int LAP_VALUE = 10000;
+
+
+    [Range(0.01f, 0.2f)]
+    [SerializeField]
+    float jumpTime = 0.05f;
+
+    [SerializeField]
+    float jumpForce = 1000f;	
                                     // the average skid factor from all wheels
     // publicly read-only props, useful for GUI, Sound effects, etc.
     public int GearNum { get; private set; }                                        // the current gear we're in.
@@ -184,22 +194,32 @@ public class CarController : MonoBehaviour
     }
 
     private int carHP;
-    public void getHit(int damage = 1)
+    public void getHit(int damage = 10)
     {
         carHP -= damage;
 
-        dealWithDamage();
+        dealWithHP();
     }
-    private void dealWithDamage()
+    private void dealWithHP()
     {
         if (carHP == 0)
         {
             speed = 0;
         }
-        if(carHP <= MAX_CAR_HP/3)
+        if (carHP > 2 * MAX_CAR_HP / 3)
         {
             // todo maxspeed est descendu
-            // eric pls do
+            healthSpeedMultip = 1.0f;
+        }
+        if (carHP <= 2*MAX_CAR_HP / 3)
+        {
+            // todo maxspeed est descendu
+            healthSpeedMultip = 0.8f;
+        }
+        else if(carHP <= MAX_CAR_HP/3)
+        {
+            // todo maxspeed est descendu
+            healthSpeedMultip = 0.5f;
         }
     }
 
@@ -220,7 +240,8 @@ public class CarController : MonoBehaviour
 
     public void ApplyRubberBand(float multiplier)
     {
-        maxSpeed = MAX_SPEED + MAX_SPEED * multiplier;
+        float maxSpeedAfterHP = MAX_SPEED *healthSpeedMultip;
+        maxSpeed = maxSpeedAfterHP + maxSpeedAfterHP * multiplier;
         maxTorque = MAX_TORQUE + MAX_TORQUE * multiplier;
         maxSteerAngle = MAX_STEER_ANGLE - MAX_STEER_ANGLE * multiplier;
     }
@@ -339,7 +360,39 @@ public class CarController : MonoBehaviour
         ProcessWheels(steerInput);
         ApplyDownforce();
         CalculateRevs();
-        PreserveDirectionInAir();
+        PreserveDirectionInAir(accelBrakeInput, steerInput);
+
+    }
+
+    private string jump;
+
+    public void Jump(string jumpButton)
+    {
+        if (anyOnGround)
+        {
+            jump = jumpButton;
+            StartCoroutine(JumpRoutine());
+        }
+    }
+
+    // http://gamasutra.com/blogs/DanielFineberg/20150825/244650/Designing_a_Jump_in_Unity.php
+    IEnumerator JumpRoutine()
+    {
+        float jumpTimer = 0;
+        // Check if jump button is still pressed
+        while (CrossPlatformInput.GetButton(jump) && jumpTimer < jumpTime )
+        {
+            // Jump time proportion
+            float proportionCompleted = jumpTimer / jumpTime;
+
+            Vector3 thisFrameJumpVector = Vector3.Lerp(new Vector3(0f, jumpForce, 0f), Vector3.zero, proportionCompleted);
+
+            // Increment the force relative to the time spent with the jump button pressed
+            rigidbody.AddForce(thisFrameJumpVector);
+
+            jumpTimer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
 
     }
 
@@ -432,7 +485,8 @@ public class CarController : MonoBehaviour
                 break;
 
             case CollectibleTypes.CollectibleHeal:
-                // todo
+                carHP = MAX_CAR_HP;
+                dealWithHP();
                 break;
 
             case CollectibleTypes.CollectibleNone:
@@ -605,13 +659,18 @@ public class CarController : MonoBehaviour
         RevsFactor = ULerp(revsRangeMin, revsRangeMax, GearFactor);
     }
 
-    void PreserveDirectionInAir()
+    void PreserveDirectionInAir(float accelBrakeInput, float steerInput)
     {
         // special feature which allows cars to remain roughly pointing in the direction of travel
         if (!anyOnGround && preserveDirectionWhileInAir && rigidbody.velocity.magnitude > smallSpeed)
         {
             rigidbody.MoveRotation(Quaternion.Slerp(rigidbody.rotation, Quaternion.LookRotation(rigidbody.velocity), Time.deltaTime));
             rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime);
+        }
+        if (!anyOnGround)
+        {
+            rigidbody.AddTorque(transform.up * steerInput * 5);
+            rigidbody.AddTorque(transform.right * accelBrakeInput * 5);
         }
     }
 
