@@ -19,8 +19,12 @@ public class CarController : MonoBehaviour
     // on the car's current speed. These gear and rev values can then be read and used by a GUI or Sound component.
 
 
+    const float MAX_SPEED = 60;
+    const float MAX_TORQUE = 35;
+    const float MAX_STEER_ANGLE = 28;
+
     [SerializeField]
-    private float maxSteerAngle = 28;                              // The maximum angle the car can steer
+    private float maxSteerAngle = MAX_STEER_ANGLE;                              // The maximum angle the car can steer
     [SerializeField]
     private float steeringResponseSpeed = 200;                     // how fast the steering responds
     [SerializeField]
@@ -30,9 +34,9 @@ public class CarController : MonoBehaviour
     [Range(0, .5f)]
     private float maxSpeedSteerResponse = 0.5f;    // the reduction in steer response at max speed
     [SerializeField]
-    private float maxSpeed = 60;                                   // the maximum speed (in meters per second!)
+    private float maxSpeed = MAX_SPEED;                                   // the maximum speed (in meters per second!)
     [SerializeField]
-    private float maxTorque = 35;                                  // the maximum torque of the engine
+    private float maxTorque = MAX_TORQUE;                                  // the maximum torque of the engine
     [SerializeField]
     private float minTorque = 10;                                  // the minimum torque of the engine
     [SerializeField]
@@ -140,8 +144,6 @@ public class CarController : MonoBehaviour
 
     private int playerPoints;
 
-
-
     public Text playerPointText;
 
 
@@ -152,6 +154,13 @@ public class CarController : MonoBehaviour
         {
             playerPoints = value;
         }
+    }
+
+    public void ApplyRubberBand(float multiplier)
+    {
+        maxSpeed = MAX_SPEED + MAX_SPEED * multiplier;
+        maxTorque = MAX_TORQUE + MAX_TORQUE * multiplier;
+        maxSteerAngle = MAX_STEER_ANGLE - MAX_STEER_ANGLE * multiplier;
     }
 
     void Start()
@@ -172,6 +181,8 @@ public class CarController : MonoBehaviour
             }
         }
     }
+
+
 
     // the following values are provided as read-only properties,
     // and are required by the Wheel script to compute grip, burnout, skidding, etc
@@ -223,10 +234,7 @@ public class CarController : MonoBehaviour
     float targetAccelInput; // target accel input is our desired acceleration input. We smooth towards it later
 
     UnityEngine.Object projectile;
-    float speed = 20;
-
-
-
+    float speed = 20; 
 
     void Awake()
     {
@@ -558,6 +566,4 @@ public class CarController : MonoBehaviour
     {
         immobilized = false;
     }
-
-
 }
