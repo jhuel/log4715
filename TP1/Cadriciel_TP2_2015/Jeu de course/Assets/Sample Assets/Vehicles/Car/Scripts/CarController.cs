@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +20,8 @@ public class CarController : MonoBehaviour
     // on the car's current speed. These gear and rev values can then be read and used by a GUI or Sound component.
 
 
-    const float MAX_SPEED = 60;
-    const float MAX_TORQUE = 35;
+    const float MAX_SPEED = 75;
+    const float MAX_TORQUE = 50;
     const float MAX_STEER_ANGLE = 28;
     const int MAX_CAR_HP = 5;
 
@@ -92,6 +93,14 @@ public class CarController : MonoBehaviour
 
     private static int CHECKPOINT_VALUE = 100;
     private static int LAP_VALUE = 10000;
+
+
+    [Range(0.01f, 0.2f)]
+    [SerializeField]
+    float jumpTime = 0.05f;
+
+    [SerializeField]
+    float jumpForce = 1000f;	
                                     // the average skid factor from all wheels
     // publicly read-only props, useful for GUI, Sound effects, etc.
     public int GearNum { get; private set; }                                        // the current gear we're in.
@@ -340,6 +349,38 @@ public class CarController : MonoBehaviour
         ApplyDownforce();
         CalculateRevs();
         PreserveDirectionInAir();
+
+    }
+
+    private string jump;
+
+    public void Jump(string jumpButton)
+    {
+        if (anyOnGround)
+        {
+            jump = jumpButton;
+            StartCoroutine(JumpRoutine());
+        }
+    }
+
+    // http://gamasutra.com/blogs/DanielFineberg/20150825/244650/Designing_a_Jump_in_Unity.php
+    IEnumerator JumpRoutine()
+    {
+        float jumpTimer = 0;
+        // Check if jump button is still pressed
+        while (CrossPlatformInput.GetButton(jump) && jumpTimer < jumpTime )
+        {
+            // Jump time proportion
+            float proportionCompleted = jumpTimer / jumpTime;
+
+            Vector3 thisFrameJumpVector = Vector3.Lerp(new Vector3(0f, jumpForce, 0f), Vector3.zero, proportionCompleted);
+
+            // Increment the force relative to the time spent with the jump button pressed
+            rigidbody.AddForce(thisFrameJumpVector);
+
+            jumpTimer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
 
     }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CarController))]
@@ -19,6 +20,11 @@ public class CarUserControlMP : MonoBehaviour
 
     [SerializeField]
     private string useCollectible = "UseCollectible1";
+
+    [SerializeField]
+    private string jump = "Jump";
+
+
 	
 	void Awake ()
 	{
@@ -46,11 +52,14 @@ public class CarUserControlMP : MonoBehaviour
         {
             car.useCollectible();
         }
+
+        if (CrossPlatformInput.GetButtonDown(jump))
+        {
+            car.Jump(jump);
+        }
     }
 	void FixedUpdate()
 	{
-
-
 
 		// pass the input to the car!
 		#if CROSS_PLATFORM_INPUT
@@ -62,6 +71,8 @@ public class CarUserControlMP : MonoBehaviour
 		float v = Input.GetAxis(vertical);
 		#endif
 		car.Move(h,v);
-		
+
 	}
+
+
 }
