@@ -361,7 +361,7 @@ public class CarController : MonoBehaviour
         ProcessWheels(steerInput);
         ApplyDownforce();
         CalculateRevs();
-        PreserveDirectionInAir();
+        PreserveDirectionInAir(accelBrakeInput, steerInput);
 
     }
 
@@ -660,13 +660,18 @@ public class CarController : MonoBehaviour
         RevsFactor = ULerp(revsRangeMin, revsRangeMax, GearFactor);
     }
 
-    void PreserveDirectionInAir()
+    void PreserveDirectionInAir(float accelBrakeInput, float steerInput)
     {
         // special feature which allows cars to remain roughly pointing in the direction of travel
         if (!anyOnGround && preserveDirectionWhileInAir && rigidbody.velocity.magnitude > smallSpeed)
         {
             rigidbody.MoveRotation(Quaternion.Slerp(rigidbody.rotation, Quaternion.LookRotation(rigidbody.velocity), Time.deltaTime));
             rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime);
+        }
+        if (!anyOnGround)
+        {
+            rigidbody.AddTorque(transform.up * steerInput * 5);
+            rigidbody.AddTorque(transform.right * accelBrakeInput * 5);
         }
     }
 
