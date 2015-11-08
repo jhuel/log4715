@@ -40,7 +40,6 @@ public class CarUserControlMP : MonoBehaviour
         if (fire)
         {
             car.ShootGreen();
-
         }
 
         if (CrossPlatformInput.GetButtonDown(fireRed))

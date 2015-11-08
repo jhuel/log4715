@@ -23,7 +23,7 @@ public class CarController : MonoBehaviour
     const float MAX_SPEED = 75;
     const float MAX_TORQUE = 50;
     const float MAX_STEER_ANGLE = 28;
-    const int MAX_CAR_HP = 5;
+    const int MAX_CAR_HP = 100;
 
     [SerializeField]
     private float maxSteerAngle = MAX_STEER_ANGLE;                              // The maximum angle the car can steer
@@ -86,6 +86,7 @@ public class CarController : MonoBehaviour
     private float smallSpeed;                                                       // A small proportion of max speed, used to decide when to start accelerating/braking when transitioning between fwd and reverse motion
     private float maxReversingSpeed;                                                // The maximum reversing speed
     private bool immobilized;                                                       // Whether the car is accepting inputs.
+    private float healthSpeedMultip;
 
     public int currentCheckpoint;
     public int currentLap;
@@ -193,22 +194,32 @@ public class CarController : MonoBehaviour
     }
 
     private int carHP;
-    public void getHit(int damage = 1)
+    public void getHit(int damage = 10)
     {
         carHP -= damage;
 
-        dealWithDamage();
+        dealWithHP();
     }
-    private void dealWithDamage()
+    private void dealWithHP()
     {
         if (carHP == 0)
         {
             speed = 0;
         }
-        if(carHP <= MAX_CAR_HP/3)
+        if (carHP > 2 * MAX_CAR_HP / 3)
         {
             // todo maxspeed est descendu
-            // eric pls do
+            healthSpeedMultip = 1.0f;
+        }
+        if (carHP <= 2*MAX_CAR_HP / 3)
+        {
+            // todo maxspeed est descendu
+            healthSpeedMultip = 0.8f;
+        }
+        else if(carHP <= MAX_CAR_HP/3)
+        {
+            // todo maxspeed est descendu
+            healthSpeedMultip = 0.5f;
         }
     }
 
@@ -229,7 +240,8 @@ public class CarController : MonoBehaviour
 
     public void ApplyRubberBand(float multiplier)
     {
-        maxSpeed = MAX_SPEED + MAX_SPEED * multiplier;
+        float maxSpeedAfterHP = MAX_SPEED *healthSpeedMultip;
+        maxSpeed = maxSpeedAfterHP + maxSpeedAfterHP * multiplier;
         maxTorque = MAX_TORQUE + MAX_TORQUE * multiplier;
         maxSteerAngle = MAX_STEER_ANGLE - MAX_STEER_ANGLE * multiplier;
     }
@@ -473,7 +485,8 @@ public class CarController : MonoBehaviour
                 break;
 
             case CollectibleTypes.CollectibleHeal:
-                // todo
+                carHP = MAX_CAR_HP;
+                dealWithHP();
                 break;
 
             case CollectibleTypes.CollectibleNone:
