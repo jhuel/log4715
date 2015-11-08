@@ -10,6 +10,15 @@ public class CarUserControlMP : MonoBehaviour
 
 	[SerializeField]
 	private string horizontal = "Horizontal";
+
+    [SerializeField]
+    private string fireGreen = "Fire1";
+
+    [SerializeField]
+    private string fireRed = "Fire2";
+
+    [SerializeField]
+    private string useCollectible = "UseCollectible1";
 	
 	void Awake ()
 	{
@@ -20,25 +29,29 @@ public class CarUserControlMP : MonoBehaviour
 	void Update()
     { 
         // http://answers.unity3d.com/questions/19710/shooting-a-bullet-projectile-properly.html 
-        if (CrossPlatformInput.GetButtonDown("Fire1"))
+
+        bool fire = CrossPlatformInput.GetButtonDown(fireGreen);
+        if (fire)
         {
             car.ShootGreen();
+
         }
 
-        if (CrossPlatformInput.GetButtonDown("Fire2"))
+        if (CrossPlatformInput.GetButtonDown(fireRed))
         {
             car.shootRed();
         }
 
-        if(CrossPlatformInput.GetButtonDown("useCollectible1"))
+        if (CrossPlatformInput.GetButtonDown(useCollectible))
         {
             car.useCollectible();
         }
-
-
     }
 	void FixedUpdate()
 	{
+
+
+
 		// pass the input to the car!
 		#if CROSS_PLATFORM_INPUT
 		float h = CrossPlatformInput.GetAxis(horizontal);
