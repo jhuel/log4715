@@ -10,15 +10,15 @@ E:\Documents\Dropbox\Documents\École\Polytechnique\Session 8\LOG4715\Lab\log471
 E:\Documents\Dropbox\Documents\École\Polytechnique\Session 8\LOG4715\Lab\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
 E:\Documents\Dropbox\Documents\École\Polytechnique\Session 8\LOG4715\Lab\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
 E:\Documents\Dropbox\Documents\École\Polytechnique\Session 8\LOG4715\Lab\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.pdb
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEditor.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.UI.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Mono.Cecil.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\nunit.framework.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Unity.DataContract.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSharpCode.NRefactory.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
-X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEditor.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.UI.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Mono.Cecil.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\nunit.framework.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Unity.DataContract.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
+C:\temp\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb

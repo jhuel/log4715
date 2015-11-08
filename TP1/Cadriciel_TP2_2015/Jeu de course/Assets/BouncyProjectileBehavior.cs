@@ -18,13 +18,14 @@ public class BouncyProjectileBehavior : MonoBehaviour {
 	
 	}
 
+
     void OnCollisionEnter(Collision collision)
     {
         doneBounces++;
 
-        if(collision.collider.gameObject.name == "")
+        if (collision.gameObject.CompareTag("Player"))
         {
-
+            Destroy(gameObject);
         }
 
         if(doneBounces == allowedBounces)
@@ -34,4 +35,5 @@ public class BouncyProjectileBehavior : MonoBehaviour {
         }
 
     }
+
 }
