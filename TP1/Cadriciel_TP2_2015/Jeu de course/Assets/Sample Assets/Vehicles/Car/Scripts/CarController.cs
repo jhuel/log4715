@@ -259,13 +259,12 @@ public class CarController : MonoBehaviour
     {
         GameObject clone;
 
-        projectile = Resources.LoadAssetAtPath("Assets/Sample Assets/Utility/Prefabs/SeekingProjectile.prefab.prefab", typeof(GameObject));
-
+        projectile = Resources.LoadAssetAtPath("Assets/Sample Assets/Utility/Prefabs/SeekingProjectile.prefab", typeof(GameObject));
         clone = Instantiate(projectile, transform.position + transform.rotation * (new Vector3(0f, 0.5f, 10f)), transform.rotation) as GameObject;
 
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Player");
 
-        GameObject closestCar;
+        Transform closestCar = null;
 
         float shortestDistance = float.MaxValue;
         /* Find closest car */
@@ -274,15 +273,19 @@ public class CarController : MonoBehaviour
             /* Find magnitude (distance between the two objects) */
             float distance =
                 (car.transform.position - clone.transform.position).magnitude;
-            if (distance < shortestDistance)
+            if (distance < shortestDistance && car != null && car.transform != transform)
             {
-                closestCar = car;
+                closestCar = car.gameObject.transform;
                 shortestDistance = distance;
             }
-
-
-           
         }
+
+        //clone.AddComponent<SeekingProjectileBehaviour>();
+            
+        
+
+        clone.GetComponent<SeekingProjectileBehaviour>().isTracking = true;
+        clone.GetComponent<SeekingProjectileBehaviour>().trackedObject = closestCar;
 
     }
 
