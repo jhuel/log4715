@@ -25,6 +25,11 @@ public class CarController : MonoBehaviour
     const float MAX_STEER_ANGLE = 28;
     const int MAX_CAR_HP = 100;
 
+
+    [SerializeField]
+    private float rotationHorizontale = 5;
+    [SerializeField]
+    private float rotationVerticale = 5;
     [SerializeField]
     private float maxSteerAngle = MAX_STEER_ANGLE;                              // The maximum angle the car can steer
     [SerializeField]
@@ -674,8 +679,8 @@ public class CarController : MonoBehaviour
         }
         if (!anyOnGround)
         {
-            rigidbody.AddTorque(transform.up * steerInput * 5);
-            rigidbody.AddTorque(transform.right * accelBrakeInput * 5);
+            rigidbody.AddTorque(transform.up * steerInput * rotationHorizontale);
+            rigidbody.AddTorque(transform.right * accelBrakeInput * rotationVerticale);
         }
     }
 
