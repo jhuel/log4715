@@ -23,10 +23,9 @@ public class SeekingProjectileBehaviour : MonoBehaviour {
         {
             transform.LookAt(trackedObject);
 
+            Vector3 translate = Vector3.forward * speed * Time.deltaTime;
 
-
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
+            transform.Translate(translate);
         }
 
 	}
