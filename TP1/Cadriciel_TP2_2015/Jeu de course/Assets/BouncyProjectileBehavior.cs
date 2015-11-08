@@ -21,12 +21,14 @@ public class BouncyProjectileBehavior : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        doneBounces++;
-
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<CarController>().getHit();
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            doneBounces++;
         }
 
         if(doneBounces == allowedBounces)
