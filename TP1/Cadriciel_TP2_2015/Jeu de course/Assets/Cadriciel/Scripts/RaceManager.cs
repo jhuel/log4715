@@ -56,6 +56,7 @@ public class RaceManager : MonoBehaviour
         //    + "  p6: " + carOrder[5].transform.name
         //    + "  p7: " + carOrder[6].transform.name
         //    + "  p8: " + carOrder[7].transform.name);
+
     }
 
 	IEnumerator StartCountdown()
