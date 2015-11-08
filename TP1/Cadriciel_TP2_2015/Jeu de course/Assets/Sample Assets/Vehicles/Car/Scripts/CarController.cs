@@ -87,16 +87,7 @@ public class CarController : MonoBehaviour
 
     private static int CHECKPOINT_VALUE = 100;
     private static int LAP_VALUE = 10000;
-
-	// publicly read-only props, useful for GUI, Sound effects, etc.
-	public int GearNum { get; private set; }                                        // the current gear we're in.
-	public float CurrentSpeed { get; private set; }                                 // the current speed of the car
-	public float CurrentSteerAngle{ get; private set; }                             // The current steering angle for steerable wheels.
-	public float AccelInput { get; private set; }                                   // the current acceleration input
-	public float BrakeInput { get; private set; }                                   // the current brake input
-	public float GearFactor  { get; private set; }                                  // value between 0-1 indicating where the current revs fall within the current range of revs for this gear
-	public float AvgPowerWheelRpmFactor { get; private set; }                       // the average RPM of all wheels marked as 'powered'
-	public float AvgSkid { get; private set; }                                      // the average skid factor from all wheels
+                                    // the average skid factor from all wheels
     // publicly read-only props, useful for GUI, Sound effects, etc.
     public int GearNum { get; private set; }                                        // the current gear we're in.
     public float CurrentSpeed { get; private set; }                                 // the current speed of the car
@@ -140,10 +131,6 @@ public class CarController : MonoBehaviour
          }
          return position;
      }
-
-	public int NumGears {					// the number of gears set up on the car
-		get { return advanced.numGears; }
-	}
 
     public int NumGears
     {					// the number of gears set up on the car
