@@ -48,12 +48,14 @@ public class RaceManager : MonoBehaviour
             carOrder[car.GetCarPosition(allCars) - 1] = car; //placer les voitures en ordre
             car.ApplyRubberBand(getRubberBandMult(car.GetCarPosition(allCars) - 1)); //appliquer le rubberbanding
         }
+
     }
 
     float getRubberBandMult(int position)
     {
         float milieu = (allCars.Length - 1) / 2 + 1;
         return ((float)position - milieu) / (allCars.Length - 1);
+
     }
 
 	IEnumerator StartCountdown()

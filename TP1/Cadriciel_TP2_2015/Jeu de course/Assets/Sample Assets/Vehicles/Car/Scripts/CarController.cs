@@ -112,14 +112,39 @@ public class CarController : MonoBehaviour
         currentLap = 0;
     }
 
+    private int SpeedBonus; // number of iteration of accel bonus
     public void OnTriggerEnter(Collider other) {
-         string otherTag = other.gameObject.tag;
-         currentCheckpoint = System.Convert.ToInt32(otherTag);
-         if (currentCheckpoint == 1) // completed a lap, so increase currentLap;
-             currentLap++;
-         lastCheckpoint = other.transform;
+
+        string otherTag = other.gameObject.tag;
+
+        if (otherTag.CompareTo("SpeedBonus") == 0)
+        {
+            SpeedBonus = 3;
+        }
+        else if (otherTag.CompareTo("checkpoint1") == 0)
+        {
+            currentLap++;
+
+            lastCheckpoint = other.transform;
+        }
+        else if (otherTag.CompareTo("checkpoint2") == 0 || otherTag.CompareTo("checkpoint3") == 0)
+        {
+            lastCheckpoint = other.transform;
+        }
+
+
+         
      }
  
+    public void Update()
+    {
+        if(SpeedBonus > 0)
+        {
+            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 500f)));
+            SpeedBonus--;
+        }
+
+    }
      public float GetDistance() {
          if (lastCheckpoint == null)
              return -10000;
@@ -165,6 +190,7 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        SpeedBonus = 0;
         PlayerPoints = 0;
     }
 
