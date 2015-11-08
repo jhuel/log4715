@@ -112,6 +112,13 @@ public class CarController : MonoBehaviour
         currentLap = 0;
     }
 
+    private enum CollectibleTypes
+    {
+        CollectibleNone,
+        CollectibleHeal,
+        CollectibleSpeed
+    }
+    private CollectibleTypes currentCollectible;
     private int SpeedBonus; // number of iteration of accel bonus
     public void OnTriggerEnter(Collider other) {
 
@@ -120,6 +127,18 @@ public class CarController : MonoBehaviour
         if (otherTag.CompareTo("SpeedBonus") == 0)
         {
             SpeedBonus = 3;
+        }
+        if (otherTag.CompareTo("CollectibleSpeed") == 0)
+        {
+            currentCollectible = CollectibleTypes.CollectibleSpeed;
+        }
+        if (otherTag.CompareTo("CollectibleHeal") == 0)
+        {
+            currentCollectible = CollectibleTypes.CollectibleHeal;
+        }
+        if (otherTag.CompareTo("CollectibleXXXXXXXX") == 0)
+        {
+            currentCollectible = CollectibleTypes.CollectibleNone;
         }
         else if (otherTag.CompareTo("checkpoint1") == 0)
         {
@@ -131,9 +150,6 @@ public class CarController : MonoBehaviour
         {
             lastCheckpoint = other.transform;
         }
-
-
-         
      }
  
     public void Update()
@@ -170,6 +186,7 @@ public class CarController : MonoBehaviour
     private int playerPoints;
 
     public Text playerPointText;
+    public Text playerCollectibleText;
 
 
     public int PlayerPoints
@@ -190,6 +207,7 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        currentCollectible = CollectibleTypes.CollectibleNone;
         SpeedBonus = 0;
         PlayerPoints = 0;
     }
@@ -310,6 +328,28 @@ public class CarController : MonoBehaviour
         {
             playerPointText.text = ("Styling points : " + playerPoints.ToString());
         }
+
+        if(playerCollectibleText != null)
+        {
+            string collectibleString;
+            switch(currentCollectible)
+            {
+                case CollectibleTypes.CollectibleHeal:
+                    collectibleString = "Heal";
+                    break;
+                case CollectibleTypes.CollectibleSpeed:
+                    collectibleString = "Speed";
+                    break;
+                case CollectibleTypes.CollectibleNone:
+                default:
+                    collectibleString = "No collectibles";
+                    break;
+            }
+
+            playerCollectibleText.text = "Current Collectible : " + collectibleString;
+        }
+
+        
     }
 
     public void ShootGreen()
@@ -360,6 +400,27 @@ public class CarController : MonoBehaviour
         clone.GetComponent<SeekingProjectileBehaviour>().isTracking = true;
         clone.GetComponent<SeekingProjectileBehaviour>().trackedObject = closestCar;
 
+    }
+
+    public void useCollectible()
+    { 
+        switch(currentCollectible)
+        {
+            case CollectibleTypes.CollectibleSpeed:
+                SpeedBonus = 3;
+                break;
+
+            case CollectibleTypes.CollectibleHeal:
+                // todo
+                break;
+
+            case CollectibleTypes.CollectibleNone:
+            default:
+                break;
+
+        }
+
+        currentCollectible = CollectibleTypes.CollectibleNone;
     }
 
 

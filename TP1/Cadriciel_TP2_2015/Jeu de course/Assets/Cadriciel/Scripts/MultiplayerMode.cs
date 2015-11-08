@@ -16,6 +16,8 @@ public class MultiplayerMode : MonoBehaviour {
 	[SerializeField]
 	private string horizontal = "Horizontal2";
 
+	private CarController car;  // the car controller we want to use
+
 	void FixedUpdate()
 	{
 		// pass the input to the car!
@@ -26,6 +28,11 @@ public class MultiplayerMode : MonoBehaviour {
 		float h = Input.GetAxis(horizontal);
 		float v = Input.GetAxis(vertical);
 		#endif
+
+        if(car != null)
+            car.useCollectible();
+        else
+            car = GetComponent<CarController>();
 
 		if (h != 0f || v!= 0f)
 		{

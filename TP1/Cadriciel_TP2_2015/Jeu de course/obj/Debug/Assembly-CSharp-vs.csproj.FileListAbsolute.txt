@@ -34,3 +34,15 @@ X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSharp
 X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
 X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
 X:\Documents\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEditor.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.UI.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Mono.Cecil.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\nunit.framework.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Unity.DataContract.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb
+C:\temp\newgitbecausepoly\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache

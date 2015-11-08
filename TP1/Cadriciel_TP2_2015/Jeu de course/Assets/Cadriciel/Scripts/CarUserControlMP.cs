@@ -16,6 +16,9 @@ public class CarUserControlMP : MonoBehaviour
 
     [SerializeField]
     private string fireRed = "Fire2";
+
+    [SerializeField]
+    private string useCollectible = "UseCollectible1";
 	
 	void Awake ()
 	{
@@ -31,6 +34,7 @@ public class CarUserControlMP : MonoBehaviour
         if (fire)
         {
             car.ShootGreen();
+
         }
 
         if (CrossPlatformInput.GetButtonDown(fireRed))
@@ -38,6 +42,10 @@ public class CarUserControlMP : MonoBehaviour
             car.shootRed();
         }
 
+        if (CrossPlatformInput.GetButtonDown(useCollectible))
+        {
+            car.useCollectible();
+        }
     }
 	void FixedUpdate()
 	{
