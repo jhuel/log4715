@@ -186,6 +186,7 @@ public class CarController : MonoBehaviour
     private int playerPoints;
 
     public Text playerPointText;
+    public Text playerCollectibleText;
 
 
     public int PlayerPoints
@@ -327,6 +328,28 @@ public class CarController : MonoBehaviour
         {
             playerPointText.text = ("Styling points : " + playerPoints.ToString());
         }
+
+        if(playerCollectibleText != null)
+        {
+            string collectibleString;
+            switch(currentCollectible)
+            {
+                case CollectibleTypes.CollectibleHeal:
+                    collectibleString = "Heal";
+                    break;
+                case CollectibleTypes.CollectibleSpeed:
+                    collectibleString = "Speed";
+                    break;
+                case CollectibleTypes.CollectibleNone:
+                default:
+                    collectibleString = "No collectibles";
+                    break;
+            }
+
+            playerCollectibleText.text = "Current Collectible : " + collectibleString;
+        }
+
+        
     }
 
     public void ShootGreen()
