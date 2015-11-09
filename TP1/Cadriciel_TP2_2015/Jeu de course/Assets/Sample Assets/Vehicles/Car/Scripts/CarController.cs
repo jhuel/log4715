@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -107,8 +108,8 @@ public class CarController : MonoBehaviour
     float jumpTime = 0.05f;
 
     [SerializeField]
-    float jumpForce = 1000f;	
-                                    // the average skid factor from all wheels
+    float jumpForce = 1000f;
+    // the average skid factor from all wheels
     // publicly read-only props, useful for GUI, Sound effects, etc.
     public int GearNum { get; private set; }                                        // the current gear we're in.
     public float CurrentSpeed { get; private set; }                                 // the current speed of the car
@@ -119,7 +120,7 @@ public class CarController : MonoBehaviour
     public float AvgPowerWheelRpmFactor { get; private set; }                       // the average RPM of all wheels marked as 'powered'
     public float AvgSkid { get; private set; }                                      // the average skid factor from all wheels
     public float RevsFactor { get; private set; }                                   // value between 0-1 indicating where the current revs fall between 0 and max revs
-    public float SpeedFactor { get;  private set; }                                 // value between 0-1 of the car's current speed relative to max speed
+    public float SpeedFactor { get; private set; }                                 // value between 0-1 of the car's current speed relative to max speed
 
 
     // Use this for initialization
@@ -138,7 +139,8 @@ public class CarController : MonoBehaviour
     }
     private CollectibleTypes currentCollectible;
     private int SpeedBonus; // number of iteration of accel bonus
-    public void OnTriggerEnter(Collider other) {
+    public void OnTriggerEnter(Collider other)
+    {
 
         string otherTag = other.gameObject.tag;
 
@@ -163,37 +165,43 @@ public class CarController : MonoBehaviour
             currentLap++;
 
             lastCheckpoint = other.transform;
+            currentCheckpoint = 1;
         }
-        else if (otherTag.CompareTo("checkpoint2") == 0 || otherTag.CompareTo("checkpoint3") == 0)
+        else if (otherTag.Contains("checkpoint"))
         {
+            string resultString = Regex.Match(otherTag, @"\d+").Value;
+            currentCheckpoint = Int32.Parse(resultString);
             lastCheckpoint = other.transform;
         }
-     }
- 
+    }
+
     public void Update()
     {
-        if(SpeedBonus > 0)
+        if (SpeedBonus > 0)
         {
             rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 200f)));
             SpeedBonus--;
         }
 
     }
-     public float GetDistance() {
-         if (lastCheckpoint == null)
-             return -10000;
-         return (transform.position - lastCheckpoint.position).magnitude + currentCheckpoint * CHECKPOINT_VALUE + currentLap * LAP_VALUE;
-     }
- 
-     public int GetCarPosition(CarController[] allCars) {
-         float distance = GetDistance();
-         int position = 1;
-         foreach (CarController car in allCars) {
-             if (car.GetDistance() > distance && name != car.name)
-                 position++;
-         }
-         return position;
-     }
+    public float GetDistance()
+    {
+        if (lastCheckpoint == null)
+            return -10000;
+        return (transform.position - lastCheckpoint.position).magnitude + currentCheckpoint * CHECKPOINT_VALUE + currentLap * LAP_VALUE;
+    }
+
+    public int GetCarPosition(CarController[] allCars)
+    {
+        float distance = GetDistance();
+        int position = 1;
+        foreach (CarController car in allCars)
+        {
+            if (car.GetDistance() > distance && name != car.name)
+                position++;
+        }
+        return position;
+    }
 
     public int NumGears
     {					// the number of gears set up on the car
@@ -210,23 +218,23 @@ public class CarController : MonoBehaviour
     }
     private void dealWithHP()
     {
-        if(carHP < 0)
+        if (carHP < 0)
         {
             carHP = 0;
         }
 
-        
+
         if (carHP > 2 * MAX_CAR_HP / 3)
         {
             // todo maxspeed est descendu
             healthSpeedMultip = 1.0f;
         }
-        if (carHP <= 2*MAX_CAR_HP / 3)
+        if (carHP <= 2 * MAX_CAR_HP / 3)
         {
             // todo maxspeed est descendu
             healthSpeedMultip = 0.8f;
         }
-        else if(carHP <= MAX_CAR_HP/3)
+        else if (carHP <= MAX_CAR_HP / 3)
         {
             // todo maxspeed est descendu
             healthSpeedMultip = 0.5f;
@@ -235,7 +243,7 @@ public class CarController : MonoBehaviour
         {
             // todo maxspeed est descendu
             healthSpeedMultip = 0.1f;
-        } 
+        }
         else if (carHP == 0)
         {
             healthSpeedMultip = 0;
@@ -246,7 +254,6 @@ public class CarController : MonoBehaviour
 
     public Text playerPointText;
     public Text playerCollectibleText;
-    public Text playerHPText;
     public Slider playerHPSlider;
     public Slider playerNitroSlider;
 
@@ -261,7 +268,7 @@ public class CarController : MonoBehaviour
 
     public void ApplyRubberBand(float multiplier)
     {
-        float maxSpeedAfterHP = MAX_SPEED *healthSpeedMultip;
+        float maxSpeedAfterHP = MAX_SPEED * healthSpeedMultip;
         maxSpeed = maxSpeedAfterHP + maxSpeedAfterHP * multiplier;
         maxTorque = MAX_TORQUE + MAX_TORQUE * multiplier;
         maxSteerAngle = MAX_STEER_ANGLE - MAX_STEER_ANGLE * multiplier;
@@ -349,7 +356,7 @@ public class CarController : MonoBehaviour
     float targetAccelInput; // target accel input is our desired acceleration input. We smooth towards it later
 
     UnityEngine.Object projectile;
-    float speed = 20; 
+    float speed = 20;
 
     void Awake()
     {
@@ -409,7 +416,7 @@ public class CarController : MonoBehaviour
     {
         float jumpTimer = 0;
         // Check if jump button is still pressed
-        while (CrossPlatformInput.GetButton(jump) && jumpTimer < jumpTime )
+        while (CrossPlatformInput.GetButton(jump) && jumpTimer < jumpTime)
         {
             // Jump time proportion
             float proportionCompleted = jumpTimer / jumpTime;
@@ -432,10 +439,10 @@ public class CarController : MonoBehaviour
             playerPointText.text = ("Styling points : " + playerPoints.ToString());
         }
 
-        if(playerCollectibleText != null)
+        if (playerCollectibleText != null)
         {
             string collectibleString;
-            switch(currentCollectible)
+            switch (currentCollectible)
             {
                 case CollectibleTypes.CollectibleHeal:
                     collectibleString = "Heal";
@@ -452,7 +459,7 @@ public class CarController : MonoBehaviour
             playerCollectibleText.text = "Current Collectible : " + collectibleString;
         }
 
-        if(playerHPSlider != null)
+        if (playerHPSlider != null)
         {
             playerHPSlider.gameObject.SetActive(true);
             playerHPSlider.value = carHP;
@@ -508,8 +515,8 @@ public class CarController : MonoBehaviour
         }
 
         //clone.AddComponent<SeekingProjectileBehaviour>();
-            
-        
+
+
 
         clone.GetComponent<SeekingProjectileBehaviour>().isTracking = true;
         clone.GetComponent<SeekingProjectileBehaviour>().trackedObject = closestCar;
@@ -517,7 +524,7 @@ public class CarController : MonoBehaviour
     }
     public void useNitro()
     {
-        if(carNitro >= 10)
+        if (carNitro >= 10)
         {
             SpeedBonus += 2;
             carNitro -= 10;
@@ -525,8 +532,8 @@ public class CarController : MonoBehaviour
     }
 
     public void useCollectible()
-    { 
-        switch(currentCollectible)
+    {
+        switch (currentCollectible)
         {
             case CollectibleTypes.CollectibleSpeed:
                 SpeedBonus = 10;

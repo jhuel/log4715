@@ -58,3 +58,15 @@ C:\temp\log4715\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSh
 C:\temp\log4715\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
 C:\temp\log4715\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
 C:\temp\log4715\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEditor.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\UnityEngine.UI.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Mono.Cecil.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\nunit.framework.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\Unity.DataContract.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.dll
+C:\temp\test\log4715\TP1\Cadriciel_TP2_2015\Jeu de course\obj\Debug\Assembly-CSharp.pdb

@@ -18,7 +18,6 @@ public class PillarHealth : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider.gameObject.tag);
         switch (collision.collider.gameObject.tag)
         {
             case "CarCollider" :
