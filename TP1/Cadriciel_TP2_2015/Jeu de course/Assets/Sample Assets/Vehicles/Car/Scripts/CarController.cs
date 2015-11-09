@@ -24,6 +24,7 @@ public class CarController : MonoBehaviour
     const float MAX_TORQUE = 50;
     const float MAX_STEER_ANGLE = 28;
     const int MAX_CAR_HP = 100;
+    const int MAX_CAR_NITRO = 100;
 
 
     [SerializeField]
@@ -132,6 +133,7 @@ public class CarController : MonoBehaviour
     {
         CollectibleNone,
         CollectibleHeal,
+        CollectibleNitro,
         CollectibleSpeed
     }
     private CollectibleTypes currentCollectible;
@@ -152,9 +154,9 @@ public class CarController : MonoBehaviour
         {
             currentCollectible = CollectibleTypes.CollectibleHeal;
         }
-        if (otherTag.CompareTo("CollectibleXXXXXXXX") == 0)
+        if (otherTag.CompareTo("CollectibleNitro") == 0)
         {
-            currentCollectible = CollectibleTypes.CollectibleNone;
+            currentCollectible = CollectibleTypes.CollectibleNitro;
         }
         else if (otherTag.CompareTo("checkpoint1") == 0)
         {
@@ -172,7 +174,7 @@ public class CarController : MonoBehaviour
     {
         if(SpeedBonus > 0)
         {
-            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 250f)));
+            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 200f)));
             SpeedBonus--;
         }
 
@@ -199,6 +201,7 @@ public class CarController : MonoBehaviour
     }
 
     private int carHP;
+    private int carNitro;
     public void getHit(int damage = 10)
     {
         carHP -= damage;
@@ -207,10 +210,12 @@ public class CarController : MonoBehaviour
     }
     private void dealWithHP()
     {
-        if (carHP == 0)
+        if(carHP < 0)
         {
-            speed = 0;
+            carHP = 0;
         }
+
+        
         if (carHP > 2 * MAX_CAR_HP / 3)
         {
             // todo maxspeed est descendu
@@ -226,6 +231,15 @@ public class CarController : MonoBehaviour
             // todo maxspeed est descendu
             healthSpeedMultip = 0.5f;
         }
+        else if (carHP <= MAX_CAR_HP / 10)
+        {
+            // todo maxspeed est descendu
+            healthSpeedMultip = 0.1f;
+        } 
+        else if (carHP == 0)
+        {
+            healthSpeedMultip = 0;
+        }
     }
 
     private int playerPoints;
@@ -233,6 +247,8 @@ public class CarController : MonoBehaviour
     public Text playerPointText;
     public Text playerCollectibleText;
     public Text playerHPText;
+    public Slider playerHPSlider;
+    public Slider playerNitroSlider;
 
     public int PlayerPoints
     {
@@ -257,7 +273,14 @@ public class CarController : MonoBehaviour
         SpeedBonus = 0;
         PlayerPoints = 0;
         carHP = MAX_CAR_HP;
+        carNitro = MAX_CAR_NITRO;
         healthSpeedMultip = 1.0f;
+        if (playerNitroSlider != null)
+            playerNitroSlider.gameObject.SetActive(false);
+
+        if (playerHPSlider != null)
+            playerHPSlider.gameObject.SetActive(false);
+
     }
 
     private int airPoints = 0;
@@ -429,11 +452,17 @@ public class CarController : MonoBehaviour
             playerCollectibleText.text = "Current Collectible : " + collectibleString;
         }
 
-        if(playerHPText!= null)
+        if(playerHPSlider != null)
         {
-            playerHPText.text = "HP = " + carHP.ToString();
+            playerHPSlider.gameObject.SetActive(true);
+            playerHPSlider.value = carHP;
+
         }
-        
+        if (playerNitroSlider != null)
+        {
+            playerNitroSlider.gameObject.SetActive(true);
+            playerNitroSlider.value = carNitro;
+        }
     }
 
     public void ShootGreen()
@@ -486,20 +515,30 @@ public class CarController : MonoBehaviour
         clone.GetComponent<SeekingProjectileBehaviour>().trackedObject = closestCar;
 
     }
+    public void useNitro()
+    {
+        if(carNitro >= 10)
+        {
+            SpeedBonus += 2;
+            carNitro -= 10;
+        }
+    }
 
     public void useCollectible()
     { 
         switch(currentCollectible)
         {
             case CollectibleTypes.CollectibleSpeed:
-                SpeedBonus = 3;
+                SpeedBonus = 10;
                 break;
 
             case CollectibleTypes.CollectibleHeal:
                 carHP = MAX_CAR_HP;
                 dealWithHP();
                 break;
-
+            case CollectibleTypes.CollectibleNitro:
+                carNitro = MAX_CAR_NITRO;
+                break;
             case CollectibleTypes.CollectibleNone:
             default:
                 break;
@@ -507,19 +546,6 @@ public class CarController : MonoBehaviour
         }
 
         currentCollectible = CollectibleTypes.CollectibleNone;
-    }
-
-
-    void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log (collision.collider.gameObject.name);
-
-
-        if (gameObject.name == "Joueur 1")
-        { // Player 1 is concerned
-
-        }
-
     }
 
     void ConvertInputToAccelerationAndBraking(float accelBrakeInput)

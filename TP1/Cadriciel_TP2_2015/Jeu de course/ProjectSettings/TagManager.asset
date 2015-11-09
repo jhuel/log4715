@@ -18,6 +18,7 @@ TagManager:
   - CollectibleHeal
   - BouncyProjectile
   - SeekingProjectile
+  - CollectibleNitro
   - CarCollider
   - DestructibleWall
   - 
