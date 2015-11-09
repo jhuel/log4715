@@ -275,6 +275,12 @@ public class CarController : MonoBehaviour
         carHP = MAX_CAR_HP;
         carNitro = MAX_CAR_NITRO;
         healthSpeedMultip = 1.0f;
+        if (playerNitroSlider != null)
+            playerNitroSlider.gameObject.SetActive(false);
+
+        if (playerHPSlider != null)
+            playerHPSlider.gameObject.SetActive(false);
+
     }
 
     private int airPoints = 0;
@@ -448,10 +454,13 @@ public class CarController : MonoBehaviour
 
         if(playerHPSlider != null)
         {
+            playerHPSlider.gameObject.SetActive(true);
             playerHPSlider.value = carHP;
+
         }
         if (playerNitroSlider != null)
         {
+            playerNitroSlider.gameObject.SetActive(true);
             playerNitroSlider.value = carNitro;
         }
     }
