@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,14 +18,14 @@ public class CarController : MonoBehaviour
     // experience, allowing burnouts and drifting behavior in a way that is not readily achievable using
     // constant values on wheelcolliders alone.
 
-    // The code priorities fun over realism, and although a gears system is included, it is not used to 
+    // The code priorities fun over realism, and although a gears system is included, it is not used to
     // 'drive' the engine. Instead, the current revs and gear are calculated retrospectively based
     // on the car's current speed. These gear and rev values can then be read and used by a GUI or Sound component.
 
 
-    const float MAX_SPEED = 75;
+    const float MAX_SPEED = 100;
     const float MAX_TORQUE = 50;
-    const float MAX_STEER_ANGLE = 28;
+    const float MAX_STEER_ANGLE = 20;
     const int MAX_CAR_HP = 100;
     const int MAX_CAR_NITRO = 100;
 
@@ -63,11 +65,11 @@ public class CarController : MonoBehaviour
         [Range(0, 1)]
         public float burnoutSlipEffect = 0.4f;                        // how much the car wheels will slide when burning out
         [Range(0, 1)]
-        public float burnoutTendency = 0.2f;                          // how likely the car is to burnout 
+        public float burnoutTendency = 0.2f;                          // how likely the car is to burnout
         [Range(0, 1)]
         public float spinoutSlipEffect = 0.5f;                        // how easily the car spins out when turning
         [Range(0, 1)]
-        public float sideSlideEffect = 0.5f;                          // how easily the car loses sideways grip 
+        public float sideSlideEffect = 0.5f;                          // how easily the car loses sideways grip
 
         public float downForce = 30;                                                // the amount of downforce applied (speed is factored in)
         public int numGears = 5;                                                    // the number of gears
@@ -139,14 +141,17 @@ public class CarController : MonoBehaviour
     }
     private CollectibleTypes currentCollectible;
     private int SpeedBonus; // number of iteration of accel bonus
+    private float timeOutside = 0f;
+    private bool isOutside = false;
+
+    private int mapTriggers = 0;
     public void OnTriggerEnter(Collider other)
     {
-
         string otherTag = other.gameObject.tag;
 
         if (otherTag.CompareTo("SpeedBonus") == 0)
         {
-            SpeedBonus = 3;
+            SpeedBonus = 15;
         }
         if (otherTag.CompareTo("CollectibleSpeed") == 0)
         {
@@ -173,17 +178,30 @@ public class CarController : MonoBehaviour
             currentCheckpoint = Int32.Parse(resultString);
             lastCheckpoint = other.transform;
         }
+
+        else if (otherTag.CompareTo("MapCollider") == 0)
+        {
+            mapTriggers++;
+            isOutside = false;
+            timeOutside = 0;
+        }
     }
 
-    public void Update()
+    public void OnTriggerExit(Collider other)
     {
-        if (SpeedBonus > 0)
+
+        if (other.gameObject.CompareTag("MapCollider"))
         {
-            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 200f)));
-            SpeedBonus--;
+            mapTriggers--;
         }
 
+        if (mapTriggers <= 0)
+        {
+            isOutside = true;
+        }
     }
+
+    
     public float GetDistance()
     {
         if (lastCheckpoint == null)
@@ -204,7 +222,7 @@ public class CarController : MonoBehaviour
     }
 
     public int NumGears
-    {					// the number of gears set up on the car
+    {                                   // the number of gears set up on the car
         get { return advanced.numGears; }
     }
 
@@ -226,22 +244,18 @@ public class CarController : MonoBehaviour
 
         if (carHP > 2 * MAX_CAR_HP / 3)
         {
-            // todo maxspeed est descendu
             healthSpeedMultip = 1.0f;
         }
         if (carHP <= 2 * MAX_CAR_HP / 3)
         {
-            // todo maxspeed est descendu
             healthSpeedMultip = 0.8f;
         }
         else if (carHP <= MAX_CAR_HP / 3)
         {
-            // todo maxspeed est descendu
             healthSpeedMultip = 0.5f;
         }
         else if (carHP <= MAX_CAR_HP / 10)
         {
-            // todo maxspeed est descendu
             healthSpeedMultip = 0.1f;
         }
         else if (carHP == 0)
@@ -270,8 +284,6 @@ public class CarController : MonoBehaviour
     {
         float maxSpeedAfterHP = MAX_SPEED * healthSpeedMultip;
         maxSpeed = maxSpeedAfterHP + maxSpeedAfterHP * multiplier;
-        maxTorque = MAX_TORQUE + MAX_TORQUE * multiplier;
-        maxSteerAngle = MAX_STEER_ANGLE - MAX_STEER_ANGLE * multiplier;
     }
 
     void Start()
@@ -282,17 +294,25 @@ public class CarController : MonoBehaviour
         carHP = MAX_CAR_HP;
         carNitro = MAX_CAR_NITRO;
         healthSpeedMultip = 1.0f;
+
+
+
         if (playerNitroSlider != null)
-            playerNitroSlider.gameObject.SetActive(false);
+            playerNitroSlider.gameObject.SetActive(true);
 
         if (playerHPSlider != null)
-            playerHPSlider.gameObject.SetActive(false);
+            playerHPSlider.gameObject.SetActive(true);
 
     }
 
     private int airPoints = 0;
     void FixedUpdate()
     {
+        if (CurrentSpeed > maxSpeed)
+            CurrentSpeed = maxSpeed;
+
+        //Debug.Log("max = " + maxSpeed.ToString() + "current = " + CurrentSpeed.ToString());
+
         if (!anyOnGround && CurrentSpeed != 0)
         {
             airPoints++;
@@ -301,6 +321,25 @@ public class CarController : MonoBehaviour
                 PlayerPoints += 3;
                 airPoints = 0;
             }
+        }
+        if (SpeedBonus > 0)
+        {
+            rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 175f)));
+            SpeedBonus--;
+        }
+
+        if (isOutside)
+        {
+            timeOutside += Time.deltaTime;
+        }
+
+
+
+        if (timeOutside >= 3.0f && isOutside)
+        {
+            transform.rotation = initialQuaternion;
+            transform.position = this.lastCheckpoint.position + new Vector3(0, 5f, 0);
+            rigidbody.velocity = Vector3.zero;
         }
     }
 
@@ -358,6 +397,8 @@ public class CarController : MonoBehaviour
     UnityEngine.Object projectile;
     float speed = 20;
 
+    private Quaternion initialQuaternion;
+
     void Awake()
     {
         // get a reference to all wheel attached to the car.
@@ -374,6 +415,8 @@ public class CarController : MonoBehaviour
         // a few useful speeds are calculated for use later:
         smallSpeed = maxSpeed * 0.05f;
         maxReversingSpeed = maxSpeed * advanced.reversingSpeedFactor;
+
+        initialQuaternion = transform.rotation;
     }
 
 
@@ -447,27 +490,33 @@ public class CarController : MonoBehaviour
                 case CollectibleTypes.CollectibleHeal:
                     collectibleString = "Heal";
                     break;
+
                 case CollectibleTypes.CollectibleSpeed:
                     collectibleString = "Speed";
                     break;
+
+                case CollectibleTypes.CollectibleNitro:
+                    collectibleString = "Nitro";
+                    break;
+
                 case CollectibleTypes.CollectibleNone:
                 default:
                     collectibleString = "No collectibles";
                     break;
             }
 
+            playerPoints += 100;
+
             playerCollectibleText.text = "Current Collectible : " + collectibleString;
         }
 
         if (playerHPSlider != null)
         {
-            playerHPSlider.gameObject.SetActive(true);
             playerHPSlider.value = carHP;
 
         }
         if (playerNitroSlider != null)
         {
-            playerNitroSlider.gameObject.SetActive(true);
             playerNitroSlider.value = carNitro;
         }
     }
@@ -524,10 +573,10 @@ public class CarController : MonoBehaviour
     }
     public void useNitro()
     {
-        if (carNitro >= 10)
+        if (carNitro > 0)
         {
-            SpeedBonus += 2;
-            carNitro -= 10;
+            SpeedBonus += 15;
+            carNitro -= 5; //for testing
         }
     }
 
@@ -536,7 +585,7 @@ public class CarController : MonoBehaviour
         switch (currentCollectible)
         {
             case CollectibleTypes.CollectibleSpeed:
-                SpeedBonus = 10;
+                SpeedBonus += 20;
                 break;
 
             case CollectibleTypes.CollectibleHeal:
@@ -641,7 +690,7 @@ public class CarController : MonoBehaviour
             var wheelCollider = wheel.wheelCollider;
             if (wheel.steerable)
             {
-                // apply steering to this wheel. The actual steering change applied is based on the steering range, current speed, 
+                // apply steering to this wheel. The actual steering change applied is based on the steering range, current speed,
                 // and whether the wheel is currently pointing in the direction that steering is being applied
                 var currentSteerSpeed = Mathf.Lerp(steeringResponseSpeed, steeringResponseSpeed * maxSpeedSteerResponse, curvedSpeedFactor);
                 var currentMaxAngle = Mathf.Lerp(maxSteerAngle, maxSteerAngle * maxSpeedSteerAngle, curvedSpeedFactor);
@@ -782,3 +831,4 @@ public class CarController : MonoBehaviour
         immobilized = false;
     }
 }
+

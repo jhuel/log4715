@@ -20,7 +20,6 @@ public class WallHit : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (isDestructible) {
-            Debug.Log(other.gameObject.tag);
             if (other.gameObject.CompareTag("CarCollider"))
             {
                 

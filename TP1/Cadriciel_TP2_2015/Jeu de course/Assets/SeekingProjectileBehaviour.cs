@@ -34,6 +34,8 @@ public class SeekingProjectileBehaviour : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<CarController>().getHit();
+
             collision.gameObject.rigidbody.velocity = new Vector3(0f, 0f, 0f);
             collision.gameObject.rigidbody.AddForce(0f, UpwardforceOnCollision, 0f);
             
