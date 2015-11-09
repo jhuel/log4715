@@ -7,6 +7,12 @@ public class BouncyProjectileBehavior : MonoBehaviour {
 
     private int doneBounces;
 
+    private bool isShooting;
+
+    public int speed = 80;
+
+    public float duration = 5f;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -32,10 +38,24 @@ public class BouncyProjectileBehavior : MonoBehaviour {
 
         if(doneBounces == allowedBounces)
         {
-            Debug.Log("Done bounces is damn too high");
             Destroy(gameObject);
         }
 
     }
 
+    void FixedUpdate()
+    {
+        duration -= Time.deltaTime;
+
+        if (duration <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Shoot()
+    {
+        isShooting = true;
+        this.rigidbody.velocity = this.rigidbody.velocity + (this.transform.forward * speed);
+    }
 }

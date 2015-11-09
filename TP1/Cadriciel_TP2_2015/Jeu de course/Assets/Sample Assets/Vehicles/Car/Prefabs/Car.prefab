@@ -12,7 +12,7 @@ GameObject:
   - 199: {fileID: 19900000}
   m_Layer: 8
   m_Name: Tyre Burnout Smoke
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ GameObject:
   - 23: {fileID: 2300000}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ GameObject:
   - 23: {fileID: 2300002}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ GameObject:
   - 4: {fileID: 400008}
   m_Layer: 8
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100030
 GameObject:
   m_ObjectHideFlags: 1
@@ -287,11 +287,11 @@ GameObject:
   - 4: {fileID: 400032}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400030}
-  - 114: {fileID: 11400026}
   - 114: {fileID: 11400028}
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11431016}
   m_Layer: 8
   m_Name: Car
   m_TagString: Player
@@ -312,7 +312,7 @@ GameObject:
   - 23: {fileID: 2300004}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,7 +329,7 @@ GameObject:
   - 114: {fileID: 11400024}
   m_Layer: 8
   m_Name: Headlight Right
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -360,8 +360,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400040}
   m_Layer: 8
-  m_Name: skyCar
-  m_TagString: Untagged
+  m_Name: SkyCar
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,7 +377,7 @@ GameObject:
   - 108: {fileID: 10800002}
   m_Layer: 8
   m_Name: Headlight Left
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +394,7 @@ GameObject:
   - 114: {fileID: 11400002}
   m_Layer: 8
   m_Name: Wheel Hub Back Left
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,7 +411,7 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 8
   m_Name: Wheel Hub Back Right
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,7 +428,7 @@ GameObject:
   - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: Wheel Hub Front Left
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,7 +445,7 @@ GameObject:
   - 114: {fileID: 11400004}
   m_Layer: 8
   m_Name: Wheel Hub Front Right
-  m_TagString: Untagged
+  m_TagString: CarCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -656,7 +656,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16.9579048, y: -21.4629822, z: -105.289825}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400040}
@@ -987,7 +987,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e91316ce114b0f945add53f5564abf29, type: 2}
+  - {fileID: 2100000, guid: b98787bd5cf7c5040ba01daf0dc4954c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1007,7 +1007,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e91316ce114b0f945add53f5564abf29, type: 2}
+  - {fileID: 2100000, guid: b98787bd5cf7c5040ba01daf0dc4954c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1111,7 +1111,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: 2785afb97b75016448c033cc6eabd78c, type: 2}
-  - {fileID: 2100000, guid: e91316ce114b0f945add53f5564abf29, type: 2}
+  - {fileID: 2100000, guid: b98787bd5cf7c5040ba01daf0dc4954c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1238,7 +1238,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1.10000002
   m_Drag: .100000001
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -1303,7 +1303,7 @@ Light:
     m_Bias: .00999999978
     m_Softness: 4
     m_SoftnessFade: 1
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 2c29c08dd1c0b6749b7cd0fcff7a29fd, type: 3}
   m_DrawHalo: 0
   m_ActuallyLightmapped: 0
   m_Flare: {fileID: 0}
@@ -1338,7 +1338,7 @@ Light:
     m_Bias: .00999999978
     m_Softness: 4
     m_SoftnessFade: 1
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 2c29c08dd1c0b6749b7cd0fcff7a29fd, type: 3}
   m_DrawHalo: 0
   m_ActuallyLightmapped: 0
   m_Flare: {fileID: 0}
@@ -1539,17 +1539,6 @@ MonoBehaviour:
   showOnlyOn: 1
   content: []
   childrenOfThisObject: 0
---- !u!114 &11400026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96468c245ae8e0d4f8f1c7a7b8b0542e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1585,9 +1574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1dc07dd36426549936879004f9d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationHorizontale: 5
+  rotationVerticale: 5
   maxSteerAngle: 28
   steeringResponseSpeed: 200
-  maxSpeedSteerAngle: .230000004
+  maxSpeedSteerAngle: .156000003
   maxSpeedSteerResponse: .5
   maxSpeed: 60
   maxTorque: 35
@@ -1609,9 +1600,33 @@ MonoBehaviour:
     accelChangeSmoothing: 2
     gearFactorSmoothing: 5
     revRangeBoundary: .800000012
-  preserveDirectionWhileInAir: 1
+  preserveDirectionWhileInAir: 0
   mphDisplay: {fileID: 0}
+  currentCheckpoint: 0
+  currentLap: 0
+  lastCheckpoint: {fileID: 0}
+  jumpTime: .0500000007
+  jumpForce: 200
   playerPointText: {fileID: 0}
+  playerCollectibleText: {fileID: 0}
+  playerHPText: {fileID: 0}
+--- !u!114 &11431016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf05cb758fa6ad40b25b08af07b77c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertical: Vertical
+  horizontal: Horizontal
+  fireGreen: Fire1
+  fireRed: Fire2
+  useCollectible: UseCollectible1
+  jump: Jump
 --- !u!146 &14600000
 WheelCollider:
   m_ObjectHideFlags: 1

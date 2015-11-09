@@ -5,6 +5,8 @@ public class PillarHealth : MonoBehaviour {
 
     public int health = 200;
 
+    public GameObject explosion;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -19,7 +21,10 @@ public class PillarHealth : MonoBehaviour {
         Debug.Log(collision.collider.gameObject.tag);
         switch (collision.collider.gameObject.tag)
         {
-            case "Player" :
+            case "CarCollider" :
+                Instantiate(explosion, transform.position, transform.rotation);
+                collision.collider.gameObject.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
+                collision.collider.gameObject.GetComponentInParent<Rigidbody>().angularVelocity = Vector3.zero;
                 Destroy(gameObject);
                 return;
             case "BouncyProjectile":
@@ -32,10 +37,9 @@ public class PillarHealth : MonoBehaviour {
                 break;
         }
 
-        Debug.Log(health);
-
         if (health <= 0)
         {
+            Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

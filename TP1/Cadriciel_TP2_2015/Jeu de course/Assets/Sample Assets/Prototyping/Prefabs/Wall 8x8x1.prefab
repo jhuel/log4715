@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11451458}
   m_Layer: 0
   m_Name: Wall 8x8x1
   m_TagString: Wall
@@ -25,9 +24,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: .749151766, z: 0, w: .662398517}
-  m_LocalPosition: {x: 227.559998, y: 27.8400002, z: 132.660004}
-  m_LocalScale: {x: 15.5275345, y: 2, z: 1}
+  m_LocalRotation: {x: 3.75177827e-08, y: .88762635, z: -7.23063067e-08, w: .460564405}
+  m_LocalPosition: {x: 130.520004, y: 67.961998, z: 224.779999}
+  m_LocalScale: {x: 11.0254936, y: 4.87326574, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,17 +69,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.00002909, y: 6.00006771, z: 1.00000858}
   m_Center: {x: 1.21593475e-05, y: 2.99979687, z: .499987811}
---- !u!114 &11451458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5d42c9a46f3f8e43a85f5c8104c0d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -449,7 +449,8 @@ public class CarController : MonoBehaviour
 
         //clone.rigidbody.AddRelativeForce(transform.rotation * (new Vector3(0f, 0f, 5000f)));
         clone.rigidbody.velocity = transform.rigidbody.velocity;
-        clone.rigidbody.AddForce(transform.rotation * (new Vector3(0f, 0f, 5000f)));
+
+        clone.GetComponent<BouncyProjectileBehavior>().Shoot();
     }
 
     public void shootRed()
@@ -679,6 +680,7 @@ public class CarController : MonoBehaviour
         }
         if (!anyOnGround)
         {
+            steerInput /= 2;
             rigidbody.AddTorque(transform.up * steerInput * rotationHorizontale);
             rigidbody.AddTorque(transform.right * accelBrakeInput * rotationVerticale);
         }
