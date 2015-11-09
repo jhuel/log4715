@@ -22,6 +22,12 @@ TagManager:
   - CarCollider
   - DestructibleWall
   - 
+  - checkpoint4
+  - checkpoint5
+  - checkpoint6
+  - checkpoint7
+  - MapCollider
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
